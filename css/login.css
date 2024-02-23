@@ -95,3 +95,8 @@ a:hover{
     text-decoration: underline;
     color: #8E05C2;
 }
+
+.error-message{
+    color: red;
+    
+}
