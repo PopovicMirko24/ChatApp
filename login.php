@@ -2,7 +2,7 @@
 
 require_once 'connectionDB.php';
 $error_text = "";
-
+//$_SESSION['user_id'] = null;
 if(!$conn){
     die("Neuspesna konekcija sa bazom");  
 }
@@ -10,7 +10,6 @@ if(!$conn){
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $error_text = "";
     $username = $_POST['username'];
-    $password = $_POST['password'];
 
     $sql_username = 'select user_id, password from user where username = ?';
     $run = $conn -> prepare($sql_username);
@@ -20,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     var_dump($results);
     if($results -> num_rows == 1){
         $user = $results -> fetch_assoc();
-        if(password_verify($password, $user['password'])){
+        if(password_verify($_POST['password'], $user['password'])){
             $_SESSION['user_id'] = $user['user_id'];
             header('location: profile.php');
         }else{
