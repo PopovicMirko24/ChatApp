@@ -15,16 +15,18 @@ require_once 'connectionDB.php';
         $password = $_POST['password'];
         $gender = $_POST['gender'];
 
-        $select_email_sql = "select email from user";
+        $select_email_sql = "select email from user where email = ?";
         $run = $conn -> prepare($select_email_sql);
+        $run -> bind_param("s", $email);
         $run -> execute();
 
         $results = $run -> get_result();
         if($results -> num_rows > 0){
             $error_text = "email is already in use";
         }else{
-            $select_username_sql = "select username from user";
+            $select_username_sql = "select username from user where username = ?";
             $run = $conn -> prepare($select_username_sql);
+            $run -> bind_param("s", $username);
             $run -> execute();
             $results = $run -> get_result();
             if($results -> num_rows > 0){

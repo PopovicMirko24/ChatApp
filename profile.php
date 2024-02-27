@@ -30,6 +30,32 @@ if($user['description']!=null){
     $description = $user['description'];
 }
 
+$sql_load_posts = "select * from post where user_id = ? ORDER BY created_at ASC";
+$run = $conn -> prepare($sql_load_posts);
+$run -> bind_param("i", $user_id);
+$run -> execute();
+$results = $run -> get_result();
+$posts = array();
+
+
+if(array_key_exists('button-post', $_POST)) { 
+    if($_POST['content'] == null || $_POST['content'] == ""){
+        echo "<script> alert('Post is empty'); </script>";
+    }else{
+        $sql_new_post = "insert into post (user_id, content, likes) values (?,?,0)";
+        $run = $conn -> prepare($sql_new_post);
+        $run -> bind_param("is", $user_id, $_POST['content']);
+        $run -> execute();
+
+        $sql_load_posts = "select * from post where user_id = ? ORDER BY created_at ASC";
+        $run = $conn -> prepare($sql_load_posts);
+        $run -> bind_param("i", $user_id);
+        $run -> execute();
+        $results = $run -> get_result();
+        $posts = array();
+    }
+} 
+
 ?>
 
 <!DOCTYPE html>
@@ -83,12 +109,48 @@ if($user['description']!=null){
     <section class="posts">
         <div class="container-posts">
             <div class="new-post">
-                <form action="profile.php" method="get">
+                <form action="profile.php" method="POST" class="post-form">
                     <textarea class="textarea" name="content" id="content" cols="30" rows="10" placeholder="text..."></textarea>
-                    <input type="submit" value="post" class="button-post">
+                    <input name="button-post" type="submit" value="post" class="button button-post">
                 </form>
             </div>
-            <div class="show-posts"></div>
+            <div class="all-posts">
+                <?php
+                
+                if($results->num_rows > 0){
+                    while($row = $results->fetch_assoc()) {
+                        $posts[] = $row; // Append each fetched row to the $posts array
+                    }
+
+
+                    for($i = count($posts) - 1; $i >= 0; $i--){
+                        $post = $posts[$i];
+                        echo "
+                    <div class=\"post\">
+                        <div class=\"user-img\">
+                            <div class=\"post-img-wrapper\">
+                                <img src=\"$img\" class=\"profile-img-post\">
+                            </div>
+                            <div class=\"post-name-date\">
+                                <span class=\"username-post\">".$user['username']."</span><br>
+                                <span class=\"date\">".$post['created_at']."</span>
+                            </div>
+                        </div>
+                        <div class=\"post-content\">
+                            <p class=\"post-text\">".$post['content']."</p>
+                            <button class=\"like-putton button\">like</button>
+                            <span class=\"like-count\">".$post['likes']."</span>
+                        </div>
+                    </div>
+                    ";
+                    }
+                } else {
+                    echo '<p class="no-posts">no posts</p>';
+                }
+                
+
+                ?>
+            </div>
         </div>
     </section>
 </body>

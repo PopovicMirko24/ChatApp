@@ -233,5 +233,54 @@ textarea{
 }
 
 .button-post{
-    
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.post-form{
+    border-bottom: #2c2c2c 1px solid;
+    padding-bottom: 20px;
+    align-items: center;
+}
+
+.profile-img-post{
+    width: 30px;
+}
+
+.username-post{
+    font-size: 14px;
+}
+
+.user-img{
+    width: 100%;
+}
+
+.post-img-wrapper{
+    display: inline-block;
+}
+
+.post-name-date{
+    display: inline-block;
+}
+
+.date{
+    font-size: 12px;
+    color: #b4b2b2;
+}
+
+.post{
+    padding: 20px;
+}
+
+.post-content{
+    border-bottom: #2c2c2c 1px solid;
+    padding-bottom: 20px;
+}
+
+.no-posts{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(164, 164, 164);
+    width: 20%;
 }
