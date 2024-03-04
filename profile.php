@@ -3,6 +3,7 @@
 require_once 'connectionDB.php';
 require_once 'user.php';
 require_once 'post.php';
+require_once 'search-class.php';
 
 if(!$conn){
     die("Neuspesna konekcija sa bazom");  
@@ -24,7 +25,17 @@ if(array_key_exists('button-post', $_POST)) {
         $post = new Post($user->get_id(), $_POST['content']);
         Post::create_post($conn,$post);
     }
-} 
+}
+
+
+
+if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
+    $_SESSION['search_username'] = $_GET['search-input'];
+    header('location: search-users.php');
+}
+
+
+
 
 ?>
 
@@ -35,6 +46,7 @@ if(array_key_exists('button-post', $_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/nav.css">
 </head>
 <body>
     <div class="nav">
@@ -43,9 +55,9 @@ if(array_key_exists('button-post', $_POST)) {
             <li class="center"><a href="#"><?php echo $user->get_username() ?></a></li>
             <li class="center"><a href="login.php">logout</a></li>
             <li>
-                <form action="GET">
-                    <input class="text-input" type="text" name="search" id="search" placeholder="search">
-                    <input type="submit" class="button" value="search">
+                <form action="" method="GET">
+                    <input class="text-input" type="text" name="search-input" id="search" placeholder="search">
+                    <input type="submit" class="button" value="search" name="search">
                 </form>
             </li>
         </ul>

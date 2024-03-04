@@ -1,0 +1,53 @@
+<?php 
+
+require_once 'connectionDB.php';
+
+class Search{
+
+    private $username;
+
+    public function __construct($username){
+        $this->username = $username;
+    }
+
+    public function get_username(){
+        return $this->username;
+    }
+
+    public static function search_users($conn, $username){
+        $users = array();
+        $query = 'select * from user where username = ?';
+        $run = $conn->prepare($query);
+        $run->bind_param('s', $username);
+        $run->execute();
+        $results= $run->get_result();
+        if($results->num_rows > 0){
+            $search = $results->fetch_assoc();
+            $img = "images\common_immage.webp";
+            if($search['photo_path'] != null){
+                $img = $search['photo_path'];
+            }
+            echo "
+            <a href=\"#\">
+                <div class=\"profile\">
+                    <div class=\"img-wrapper\"><img src=\"$img\"></div>
+                    <div class=\"info\">
+                        <h3 class=\"username\">" . $search['username'] . "</h3>
+                        <span class=\"name\">" . $search['name'] . " " . $search['last_name'] . "</span>
+                    </div>
+                </div>
+            </a>
+            ";
+        }else{
+            echo "
+            
+            <div class=\"profile\">
+                <p>no users</p>
+            </div>
+
+            ";
+        }
+    }
+}
+
+?>

@@ -28,122 +28,6 @@ a{
     font-weight: 100;
 }
 
-.nav{
-    color: white;
-    position: fixed;
-    width: 100%;
-    display: flex;
-    align-items: center;
-
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    padding-left: 30px;
-    padding-right: 30px;
-
-    background-color: #222222;
-}
-
-.logo{
-    font-size: 20px;
-    font-weight: 100;
-    margin: none;
-}
-
-ul{
-    display: block;
-    margin-left: auto;
-}
-
-li{
-    display: inline-block;
-}
-
-.nav-links li{
-    list-style: none;
-    margin: 0 12px;
-}
-.nav-links li a{
-    position: relative;
-    font-size: 15px;
-    padding: 6px 0;
-    text-decoration: none;
-}
-
-.nav-links li a:before{
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    width: 0%;
-    background: #34efdf;
-    border-radius: 12px;
-    transition: all 0.4s ease;
-}
-
-.nav-links li a:hover:before{
-    width: 100%;
-}
-
-.nav-links li a:before{
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    width: 0%;
-    background: #700B97;
-    border-radius: 12px;
-    transition: all 0.4s ease;
-}
-.nav-links li a:hover:before{
-    width: 100%;
-}
-
-.nav-links li.center a:before{
-    left: 50%;
-    transform: translateX(-50%);
-}  
-
-.text-input{
-    width: 250px;
-    height: 30px;
-    color: #700B97;
-    background-color: transparent;
-    font-size: 15px;
-
-    border-bottom: #700B97 solid 1.5px;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-}
-
-.text-input:focus{
-    border-bottom: #8E05C2 solid 2px;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    outline: none;
-    color: #8E05C2;
-}
-
-.button{
-    background-color: transparent;
-    color: #8E05C2;
-    border: 1px solid #8E05C2;
-    width: 90px;
-    height: 30px;
-    font-size: 14px;
-    transition: ease-in-out .3s;
-}
-
-.button:hover{
-    color: white;
-    border: 2px solid white;
-    letter-spacing: 3px;
-}
-
 section{
     width: 100%;
     padding-top: 100px ;
@@ -176,10 +60,14 @@ section{
     font-size: 14px;
     font-weight: 100;
     margin-top: 20px;
+    padding-bottom: 70px;
+    overflow: hidden;
+    color: #b4b2b2;
 }
 
 .name{
     display: inline-block;
+    overflow: hidden;
 }
 
 .profile-img{
@@ -189,6 +77,9 @@ section{
 
 .edit{
     display: inline-block;
+    overflow: hidden;
+    padding-top: 10px;
+    padding-bottom: 80px;
 }
 
 .edit-button{
