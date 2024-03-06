@@ -1,81 +1,86 @@
 <?php
 
 require_once 'connectionDB.php';
-//require_once 'user.php';
+require_once 'user-class.php';
+require_once 'post-class.php';
+require_once 'search-class.php';
+require_once 'comment-class.php';
 
-class Post{
-    private $post_id;
-    private $user_id;
-    private $conntent;
-    private $photo_path;
-    private $created_at;
-
-    public function __construct($user_id, $conntent){
-        $this->user_id = $user_id;
-        $this->conntent = $conntent;
-    }
-
-    public function get_user_id(){
-        return $this->user_id;
-    }
-
-    public function get_conntent(){
-        return $this->conntent;
-    }
-
-    private static function get_posts($conn,$user_id){
-        $sql_load_posts = "select * from post where user_id = ? ORDER BY created_at ASC";
-        $run = $conn -> prepare($sql_load_posts);
-        $run -> bind_param("i", $user_id);
-        $run -> execute();
-        $results = $run -> get_result();
-        return $results;
-    }
-
-    public static function create_post($conn, $post){
-        $user_id = $post->get_user_id();
-        $conntent = $post->get_conntent();
-        $sql_new_post = "insert into post (user_id, content) values (?,?)";
-        $run = $conn -> prepare($sql_new_post);
-        $run -> bind_param("is", $user_id, $conntent);
-        $run -> execute();
-        Post::get_posts($conn,$user_id);
-    }
-
-    public static function show_posts($conn, $user, $img){
-        
-        $posts = array();
-        $user_id = $user->get_id();
-        $results = Post::get_posts($conn,$user_id);
-        if($results->num_rows > 0){
-            while($row = $results->fetch_assoc()) {
-                $posts[] = $row; // Append each fetched row to the $posts array
-            }
-
-
-            for($i = count($posts) - 1; $i >= 0; $i--){
-                $post = $posts[$i];
-                echo "
-            <div class=\"post\">
-                <div class=\"user-img\">
-                    <div class=\"post-img-wrapper\">
-                        <img src=\"$img\" class=\"profile-img-post\">
-                    </div>
-                    <div class=\"post-name-date\">
-                        <span class=\"username-post\">".$user->get_username()."</span><br>
-                        <span class=\"date\">".$post['created_at']."</span>
-                    </div>
-                </div>
-                <div class=\"post-content\">
-                    <p class=\"post-text\">".$post['content']."</p>
-                </div>
-            </div>
-            ";
-            }
-        } else {
-            echo '<p class="no-posts">no posts</p>';
-        }
-    }
+if(!$conn){
+    die("Neuspesna konekcija sa bazom");  
 }
 
+if(!isset($_SESSION['user_id'])){
+    header('location: login.php');
+    exit();
+}
+
+if(!isset($_SESSION['post_id'])){
+    echo 'greska';
+}
+
+$user =  User::load_user_data($_SESSION['user_id'], $conn);
+$comments_user_img = $user->get_photo_path();
+
+$post = Post::get_post_by_id($conn, $_SESSION['post_id']);
+$posts_user = User::load_user_data($post->get_user_id(), $conn);
+$posts_user_img = $user->get_photo_path();
+$posts_user_id = $post->get_post_id();
+
+if(array_key_exists('new-comment', $_POST)) {
+    $comment = new Comment($_SESSION['post_id'], $_SESSION['user_id'], $_POST['comment-conntent']);
+    Comment::create_comment($conn, $comment);
+}
+
+
+
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/post.css">
+</head>
+<body>
+    <div class="nav">
+        <span class="logo">social media</span>
+        <ul class="nav-links">
+            <li class="center"><a href="profile.php"><?php echo $user->get_username() ?></a></li>
+            <li class="center"><a href="login.php">logout</a></li>
+            <li>
+                <form action="" method="GET">
+                    <input class="text-input" type="text" name="search-input" id="search" placeholder="search">
+                    <input type="submit" class="button" value="search" name="search">
+                </form>
+            </li>
+        </ul>
+    </div>
+    <section>
+        <div class="post">
+            <div class="info">
+                <div class="img-wrapper"><img class="post_img" src="<?php echo $posts_user_img; ?>" alt=""></div>
+                <div class="text-wrapper">
+                    <span class="username"><?php echo $posts_user->get_username(); ?></span><br>
+                    <span class="date"><?php echo $post->get_date(); ?></span>
+                </div>
+            </div>
+            <div class="conntent">
+                <p><?php echo $post->get_conntent() ?></p>
+            </div>
+        </div>
+        <div class="comments post">
+            <div class="new-comment">
+                <form action="" method="POST">
+                    <textarea name="comment-conntent" id="" cols="30" rows="10" placeholder="comment"></textarea>
+                    <input name="new-comment" class="button-post button" type="submit" value="post">
+                </form>
+            </div>
+            <?php Comment::show_comments($conn, $_SESSION['post_id']); ?>
+        </div>
+    </section>
+</body>
+</html>

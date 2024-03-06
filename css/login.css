@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Space+Grotesk&display=swap');
-
+/*
 *{
     font-family: "Comfortaa", sans-serif;
 }
@@ -95,6 +95,74 @@ a{
 a:hover{
     text-decoration: underline;
     color: #8E05C2;
+}
+
+.error-message{
+    color: red;   
+}
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Space+Grotesk&display=swap');
+
+*{
+    font-family: "Comfortaa", sans-serif;
+}
+
+body{
+    background-color: #f8f9fa; /* Very light gray */
+    overflow: hidden;
+    padding-top: 100px;
+}
+
+.container{
+    width: 40%;
+    background-color: white; /* White */
+    border-radius: 8px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: block;
+    margin: auto;
+    box-shadow: 0 0 10px 0 rgb(175, 174, 174);
+}
+
+.form-content{
+    padding: 10px 0;
+}
+
+h2{
+    font-weight: 300;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: #333; /* Dark gray */
+}
+
+.form{
+    width: 100%;
+    text-align: center;
+}
+
+input{
+    margin-top: 30px;
+    text-align: center;
+    letter-spacing: 1.5px;
+}
+
+
+p{
+    margin: 0px;
+    margin-top: 10px;
+}
+
+a{
+    color: #333; /* Purple */
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s; /* Add transition effect */
+}
+
+a:hover{
+    text-decoration: underline;
+    color: #007bff; /* Blue */
 }
 
 .error-message{

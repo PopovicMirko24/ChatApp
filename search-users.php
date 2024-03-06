@@ -1,7 +1,7 @@
 <?php
 
 require_once 'connectionDB.php';
-require_once 'user.php';
+require_once 'user-class.php';
 require_once 'search-class.php';
 
 if(!$conn){

@@ -1,8 +1,8 @@
 <?php
 
 require_once 'connectionDB.php';
-require_once 'user.php';
-require_once 'post.php';
+require_once 'user-class.php';
+require_once 'post-class.php';
 require_once 'search-class.php';
 
 if(!$conn){
@@ -34,7 +34,10 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     header('location: search-users.php');
 }
 
-
+if(array_key_exists('comment', $_GET)) {
+    $_SESSION['post_id'] = $_GET['post_id'];
+    header('location: post.php');
+}
 
 
 ?>
