@@ -17,11 +17,13 @@ if(!isset($_SESSION['user_id'])){
 if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     $_SESSION['search_username'] = $_GET['search-input'];
     header('location: search-users.php');
-}
+} 
 
 
 $user = User::load_user_data($_SESSION['user_id'], $conn);
 $name = $user->get_name() ." " .$user->get_lastname();
+
+
 
 ?>
 

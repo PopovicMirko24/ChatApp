@@ -13,7 +13,6 @@ require_once 'connectionDB.php';
         $email = $_POST['email'];
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $gender = $_POST['gender'];
 
         $select_email_sql = "select email from user where email = ?";
         $run = $conn -> prepare($select_email_sql);
@@ -33,9 +32,9 @@ require_once 'connectionDB.php';
                 $error_text = "username is already in use";
             }else{
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                $sql_insert = "insert into user (name, last_name, email, username, password, gender) values (?,?,?,?,?,?)";
+                $sql_insert = "insert into user (name, last_name, email, username, password) values (?,?,?,?,?)";
                 $run = $conn -> prepare($sql_insert);
-                $run -> bind_param("ssssss", $name, $lastname, $email, $username, $hashed_password, $gender);
+                $run -> bind_param("sssss", $name, $lastname, $email, $username, $hashed_password);
                 $run -> execute();
                 header("location: login.php");
             }
@@ -57,7 +56,7 @@ require_once 'connectionDB.php';
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form action="" method="POST" class="form" id="login">
+                <form action="" method="POST" class="form" id="register">
                     <div class="form-content">
                         <h2>Register</h2>
                         <p class="error-message"><?php echo $error_text; ?></p>

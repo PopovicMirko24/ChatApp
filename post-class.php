@@ -9,10 +9,15 @@ class Post{
     private $photo_path;
     private $created_at;
 
-    public function __construct($user_id, $conntent, $created_at){
+    /*public function __construct($user_id, $conntent, $created_at){
         $this->user_id = $user_id;
         $this->conntent = $conntent;
         $this->created_at = $created_at;
+    }*/
+
+    public function __construct($user_id, $conntent){
+        $this->user_id = $user_id;
+        $this->conntent = $conntent;
     }
 
     public function get_user_id(){
@@ -29,6 +34,10 @@ class Post{
 
     public function get_post_id(){
         return $this->post_id;
+    }
+
+    public function set_date($date){
+        $this->created_at = $date;
     }
     
 
@@ -48,7 +57,9 @@ class Post{
         $run -> execute();
         $results = $run -> get_result();
         $results = $results -> fetch_assoc();
-        return new Post($results['user_id'], $results['content'], $results['created_at']);
+        $post = new Post($results['user_id'], $results['content']);
+        $post -> set_date($results['created_at']);
+        return $post;
     }
 
 

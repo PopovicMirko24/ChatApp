@@ -27,8 +27,9 @@ class Search{
             if($search['photo_path'] != null){
                 $img = $search['photo_path'];
             }
+            $_SESSION['searched_id'] = $search['user_id'];
             echo "
-            <a href=\"#\">
+            <a href=\"user.php\">
                 <div class=\"profile\">
                     <div class=\"img-wrapper\"><img src=\"$img\"></div>
                     <div class=\"info\">
