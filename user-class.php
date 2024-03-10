@@ -114,6 +114,13 @@ class User{
             return null;
         }
     }
+
+    public static function save_changes($conn, $name, $lastname, $img, $user_id){
+        $sql = 'update user set name=?, last_name=?, photo_path=? where user_id=?';
+        $run = $conn -> prepare($sql);
+        $run -> bind_param('sssi', $name, $lastname, $img, $user_id);
+        $run -> execute();
+    }
 }
 
 ?>

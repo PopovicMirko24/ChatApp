@@ -38,7 +38,6 @@ class Comment{
         $run->bind_param('iis', $post_id, $user_id, $content);
         $run->execute();
         Comment::load_comment_data($conn, $post_id);
-
     }
 
     private static function load_comment_data($conn, $post_id){

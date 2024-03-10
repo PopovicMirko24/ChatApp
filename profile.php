@@ -85,10 +85,10 @@ if(array_key_exists('comment', $_GET)) {
                 </li>
                 <li>
                     <div class="edit">
-                        <a href="#" class="edit-button">edit profile</a>
+                        <a href="edit-profile.php" class="edit-button">edit profile</a>
                     </div>
                 </li>
-        </div>
+            </div>
         </ul>
     </section>
     <section class="posts">
