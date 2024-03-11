@@ -89,3 +89,16 @@ input[type="text"]{
     color: black;
     font-weight: bold;
 }
+
+.cl1{
+    display: inline-block;
+}
+
+.cl2{
+    display: inline-block;
+    margin-left: 40px;
+}
+
+textarea{
+    color: black;
+}

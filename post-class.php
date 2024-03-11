@@ -73,6 +73,22 @@ class Post{
         Post::get_posts_by_user($conn,$user_id);
     }
 
+    public static function get_posts($conn, $user_id) {
+        $sql = "SELECT * FROM post WHERE user_id = ?";
+        $run = $conn->prepare($sql);
+        $run->bind_param("i", $user_id);
+        $run->execute();
+        $result = $run->get_result();
+    
+        $posts = array();
+        while ($row = $result->fetch_assoc()) {
+            $posts[] = $row;
+        }
+        return $posts;
+    }
+    
+    
+
     public static function show_posts($conn, $user, $img){
         $posts = array();
         $user_id = $user->get_id();

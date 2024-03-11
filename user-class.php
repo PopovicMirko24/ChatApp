@@ -115,12 +115,13 @@ class User{
         }
     }
 
-    public static function save_changes($conn, $name, $lastname, $img, $user_id){
-        $sql = 'update user set name=?, last_name=?, photo_path=? where user_id=?';
+    public static function save_changes($conn, $name, $lastname, $description, $img, $user_id){
+        $sql = 'update user set name=?, last_name=?, description=?, photo_path=? where user_id=?';
         $run = $conn -> prepare($sql);
-        $run -> bind_param('sssi', $name, $lastname, $img, $user_id);
+        $run -> bind_param('ssssi', $name, $lastname, $description, $img, $user_id);
         $run -> execute();
     }
+
 }
 
 ?>

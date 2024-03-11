@@ -4,6 +4,7 @@ require_once 'connectionDB.php';
 require_once 'user-class.php';
 require_once 'post-class.php';
 require_once 'search-class.php';
+require_once 'following-class.php';
 
 $user_id = $_SESSION['searched_id'];
 
@@ -22,6 +23,17 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     header('location: search-users.php');
 }
 
+$following = Following::Is_following($conn, $_SESSION['user_id'], $_SESSION['searched_id']);
+
+if(array_key_exists('follow', $_POST)){
+    if($following)
+        Following::unfollow($conn, $_SESSION['user_id'], $_SESSION['searched_id']);
+    else
+        Following::follow($conn, $_SESSION['user_id'], $_SESSION['searched_id']);
+
+    header('location: user.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -32,10 +44,23 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     <title>Profile</title>
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/nav.css">
+    <script>
+        function updateFollowButton() {
+            const btn = document.getElementById("btn-follow");
+            <?php
+                if($following) {
+                    echo 'btn.value = "following";';
+                } else {
+                    echo 'btn.value = "follow";';
+                }
+            ?>
+        }
+        window.onload = updateFollowButton;
+    </script>
 </head>
 <body>
     <div class="nav">
-        <span class="logo">social media</span>
+        <span class="logo"><a href="home.php">social media</a></span>
         <ul class="nav-links">
             <li class="center"><a href="profile.php"><?php echo $user_nav->get_username() ?></a></li>
             <li class="center"><a href="login.php">logout</a></li>
@@ -65,6 +90,11 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
                         <span><?php echo $user->get_description() ?></span>
                     </div>
                 </li>
+                <div class="follow">
+                    <form action="" method="POST">
+                        <input name="follow" id="btn-follow" class="btn-follow" type="submit" value="">
+                    </form>
+                </div>
         </div>
         </ul>
     </section>
