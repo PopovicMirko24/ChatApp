@@ -42,6 +42,27 @@ class Following{
     
         return $followings;
     }
+
+    public static function get_all_followers($conn,$user2_id){
+        $sql = 'select user1_id from following where user2_id=' .$user2_id;
+        $run = $conn->prepare($sql);
+        $run->execute();
+        $results = $run->get_result();
+        $followings = array();
+        while ($row = $results->fetch_assoc()) {
+            $followings[] = $row['user1_id'];
+        }   
+        return $followings;
+    }
+
+    public static function show_following($conn, $user_id){
+        $followings = Following::get_all_followings($conn, $user_id);
+        foreach($followings as $following){
+            $user = User::load_user_data($following['user_id'],$conn);
+            $username = $user->get_username();
+            $img = $user->get_photo_path();
+        }
+    }
 }
 
 ?>

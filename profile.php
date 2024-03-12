@@ -92,7 +92,8 @@ if(array_key_exists('comment', $_GET)) {
         </ul>
     </section>
     <section class="posts">
-        <div class="container-posts">
+        <div class="content">
+        <div class="container-posts container1">
             <div class="new-post">
                 <form action="profile.php" method="POST" class="post-form">
                     <textarea class="textarea" name="content" id="content" cols="30" rows="10" placeholder="text..."></textarea>
@@ -104,6 +105,15 @@ if(array_key_exists('comment', $_GET)) {
                     Post::show_posts($conn, $user, $img);
                 ?>
             </div>
+        </div>
+        <div class="f-container">
+            <div class="followings f-content">
+                <h1>Followings</h1>
+            </div>
+            <div class="followers f-content">
+                <h1>Followers</h1>
+            </div>
+        </div>
         </div>
     </section>
 </body>

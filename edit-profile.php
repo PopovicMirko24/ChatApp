@@ -16,6 +16,7 @@ if(!isset($_SESSION['user_id'])){
 
 $user =  User::load_user_data($_SESSION['user_id'], $conn);
 $img = $user->get_photo_path();
+$des = $user->get_description();
 
 
 $upload_dir = 'images/' .$user->get_username();
@@ -79,7 +80,13 @@ if(array_key_exists('cancle', $_POST)){
                     <input type="text" name="lastname" id="" value="<?php echo $user->get_lastname() ?>">
                 </div>
                 <div class="cl2">
-                    <textarea name="description" id="" cols="30" rows="5" placeholder="description"></textarea>
+                    <textarea name="description" id="" cols="30" rows="5" value="
+                        <?php 
+                        if($des){
+                            echo $des;
+                        }
+                        ?>
+                    " placeholder="description"></textarea>
                 </div>
             </div>
             <br>

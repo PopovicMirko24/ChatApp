@@ -5,6 +5,10 @@
     color: white;
 }
 
+div{
+    border-radius: 10px;
+}
+
 body{
     padding: 0;
     margin: 0;
@@ -229,4 +233,44 @@ textarea{
 .btn-follow:hover{
     color: white;
     background-color: rgba(255, 255, 255, 0.067);
+}
+
+.content{
+    width: 62.5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container1{
+    display: inline-block;
+    width: 60%;
+    vertical-align: top;
+}
+
+.f-container{
+    display: inline-block;
+    width: 34.1%;
+    margin-left: 10px;
+}
+
+.f-container h1{
+    width: 100%;
+    text-align: center;
+    color: #b4b2b2;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.f-content{
+    background-color: #222222;
+    padding: 15px;
+    border-radius: 10px;
+    margin-left: 10px;
+    height: 37vh;
+    overflow-y: scroll;
+    scrollbar-color: rgba(0, 0, 0, 0.188);
+}
+
+.followers{
+    margin-top: 10px;
 }

@@ -38,7 +38,7 @@ $name = $user->get_name() ." " .$user->get_lastname();
 </head>
 <body>
     <div class="nav">
-        <span class="logo">social media</span>
+        <span class="logo"><a href="home.php">social media</a></span>
         <ul class="nav-links">
             <li class="center"><a href="profile.php"><?php echo $user->get_username() ?></a></li>
             <li class="center"><a href="login.php">logout</a></li>

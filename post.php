@@ -33,6 +33,11 @@ if(array_key_exists('new-comment', $_POST)) {
 }
 
 
+if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
+    $_SESSION['search_username'] = $_GET['search-input'];
+    header('location: search-users.php');
+} 
+
 
 ?>
 

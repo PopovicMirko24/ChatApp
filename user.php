@@ -90,11 +90,18 @@ if(array_key_exists('follow', $_POST)){
                         <span><?php echo $user->get_description() ?></span>
                     </div>
                 </li>
-                <div class="follow">
+                <?php
+                    if($_SESSION['user_id'] != $_SESSION['searched_id'])
+                        echo '
+
+                        <div class="follow">
                     <form action="" method="POST">
                         <input name="follow" id="btn-follow" class="btn-follow" type="submit" value="">
                     </form>
                 </div>
+
+                        ';
+                ?>
         </div>
         </ul>
     </section>
