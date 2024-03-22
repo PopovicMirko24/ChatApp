@@ -274,3 +274,25 @@ textarea{
 .followers{
     margin-top: 10px;
 }
+
+.following-img{
+    width: 50px;
+}
+
+.img-wrapper-following{
+    display: inline-block;
+    overflow: hidden;
+    width: 50px;
+    padding: 1px;
+    border-radius: none;
+}
+
+.following-username{
+    display: inline-block;
+    overflow: hidden;
+    margin-left: 5px;
+}
+
+.link:hover .link-username{
+    text-decoration: underline;
+}

@@ -1,9 +1,10 @@
 <?php
 
 require_once 'connectionDB.php';
-require_once 'user-class.php';
-require_once 'post-class.php';
-require_once 'search-class.php';
+require_once 'classes/user-class.php';
+require_once 'classes/post-class.php';
+require_once 'classes/search-class.php';
+require_once 'classes/following-class.php';
 
 if(!$conn){
     die("Neuspesna konekcija sa bazom");  
@@ -109,9 +110,11 @@ if(array_key_exists('comment', $_GET)) {
         <div class="f-container">
             <div class="followings f-content">
                 <h1>Followings</h1>
+                <?php Following::show_following($conn, $_SESSION['user_id']); ?>
             </div>
             <div class="followers f-content">
                 <h1>Followers</h1>
+                <?php Following::show_followers($conn, $_SESSION['user_id']); ?>
             </div>
         </div>
         </div>

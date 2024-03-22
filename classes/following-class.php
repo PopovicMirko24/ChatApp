@@ -19,7 +19,7 @@ class Following{
     public static function follow($conn,$user1_id, $user2_id){
         $sql = 'insert into following (user1_id, user2_id) values (?,?)';
         $run = $conn->prepare($sql);
-        $run -> bind_param('ii', $user1_id, $user2_id);
+        $run->bind_param('ii', $user1_id, $user2_id);
         $run->execute();
     }
 
@@ -56,13 +56,44 @@ class Following{
     }
 
     public static function show_following($conn, $user_id){
+        $followings = array();
         $followings = Following::get_all_followings($conn, $user_id);
         foreach($followings as $following){
-            $user = User::load_user_data($following['user_id'],$conn);
+            $user = User::load_user_data($following,$conn);
             $username = $user->get_username();
             $img = $user->get_photo_path();
+            echo '
+            <a href="user.php?username=' . $username . '" class="link">
+            <div class="users">
+                <div class="img-wrapper-following"><img src="' . $img . '" alt="" class="following-img"></div>
+                <div class="following-username"><p class="following-username link-username">' . $username . '</p></div>       
+            </div></a>
+            ';
+        }
+    }
+
+    public static function show_followers($conn, $user_id){
+        $followings = array();
+        $followings = Following::get_all_followers($conn, $user_id);
+        if($followings == null){
+            echo 'no followers';
+        }else{
+            foreach($followings as $following){
+                $user = User::load_user_data($following,$conn);
+                $username = $user->get_username();
+                $img = $user->get_photo_path();
+                echo '
+                <a href="user.php?username=' . $username . '" class="link">
+                <div class="users">
+                    <div class="img-wrapper-following"><img src="' . $img . '" alt="" class="following-img"></div>
+                    <div class="following-username"><p class="following-username link-username">' . $username . '</p></div>       
+                </div></a>
+                ';
+            }
         }
     }
 }
+
+
 
 ?>

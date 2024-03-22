@@ -1,15 +1,22 @@
 <?php
 
 require_once 'connectionDB.php';
-require_once 'user-class.php';
-require_once 'post-class.php';
-require_once 'search-class.php';
-require_once 'following-class.php';
+require_once 'classes/user-class.php';
+require_once 'classes/post-class.php';
+require_once 'classes/search-class.php';
+require_once 'classes/following-class.php';
 
-$user_id = $_SESSION['searched_id'];
+if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
+    $_SESSION['search_username'] = $_GET['search-input'];
+    header('location: search-users.php');
+}
 
-$user = User::load_user_data($user_id, $conn);
-$img = $user->get_photo_path();
+if(isset($_GET['username'])) {
+    $username = $_GET['username'];
+    $username = str_replace("'", "", $username);
+    $user = User::load_user_data_by_username($username, $conn);
+    $img = $user->get_photo_path();
+}
 
 $user_nav = User::load_user_data($_SESSION['user_id'], $conn);
 
@@ -18,20 +25,15 @@ if(array_key_exists('comment', $_GET)) {
     header('location: post.php');
 }
 
-if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
-    $_SESSION['search_username'] = $_GET['search-input'];
-    header('location: search-users.php');
-}
-
-$following = Following::Is_following($conn, $_SESSION['user_id'], $_SESSION['searched_id']);
+$following = Following::Is_following($conn, $_SESSION['user_id'], $user->get_id());
 
 if(array_key_exists('follow', $_POST)){
     if($following)
-        Following::unfollow($conn, $_SESSION['user_id'], $_SESSION['searched_id']);
+        Following::unfollow($conn, $_SESSION['user_id'], $user->get_id());
     else
-        Following::follow($conn, $_SESSION['user_id'], $_SESSION['searched_id']);
+        Following::follow($conn, $_SESSION['user_id'], $user->get_id());
 
-    header('location: user.php');
+    header('location: user.php?username='. $user->get_username());
 }
 
 ?>
@@ -91,7 +93,7 @@ if(array_key_exists('follow', $_POST)){
                     </div>
                 </li>
                 <?php
-                    if($_SESSION['user_id'] != $_SESSION['searched_id'])
+                    if($_SESSION['user_id'] != $user->get_id())
                         echo '
 
                         <div class="follow">

@@ -1,9 +1,9 @@
 <?php
 
 require_once 'connectionDB.php';
-require_once 'user-class.php';
-require_once 'post-class.php';
-require_once 'search-class.php';
+require_once 'classes/user-class.php';
+require_once 'classes/post-class.php';
+require_once 'classes/search-class.php';
 
 if(!$conn){
     die("Neuspesna konekcija sa bazom");  

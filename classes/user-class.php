@@ -88,6 +88,35 @@ class User{
         return new User($user_id, $user['name'], $user['last_name'], $user['username'],$user['email'], $img, $description);
     }
 
+    public static function load_user_data_by_username($username, $conn){
+        $sql_user = "SELECT * FROM User WHERE username = ?";
+        $run = $conn->prepare($sql_user);
+       $run->bind_param("s", $username); // Use "s" for string parameter
+        $run->execute();
+        if ($run->error) {
+            die('Error executing query: ' . $run->error);
+        }
+        $results = $run->get_result();
+        $user = $results->fetch_assoc();
+    
+        $img = "images\common_immage.webp";
+        $description = "no description";
+        if($user !== null) {
+            if($user['photo_path'] != null){
+                $img = $user['photo_path'];
+            }
+    
+            if($user['description'] != null){
+                $description = $user['description'];
+            }
+        
+            return new User($user['user_id'], $user['name'], $user['last_name'], $user['username'], $username, $img, $description);
+        } else {
+            return null; // Return null if no user found
+        }
+    }
+    
+    
     public static function search_user($username, $conn){
         $sql_user = 'select * from user where username = ?';
         $run = $conn ->prepare($sql_user);

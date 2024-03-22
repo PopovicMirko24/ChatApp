@@ -1,10 +1,10 @@
 <?php
 
 require_once 'connectionDB.php';
-require_once 'user-class.php';
-require_once 'post-class.php';
-require_once 'search-class.php';
-require_once 'following-class.php';
+require_once 'classes/user-class.php';
+require_once 'classes/post-class.php';
+require_once 'classes/search-class.php';
+require_once 'classes/following-class.php';
 
 if(!$conn){
     die("Neuspesna konekcija sa bazom");  
@@ -81,19 +81,22 @@ if(array_key_exists('comment', $_GET)) {
                 foreach($all_posts as $post){
                     $user = User::load_user_data($post['user_id'], $conn);
                     $user_img = $user->get_photo_path();
+                    $username = $user->get_username();
                     // Output HTML for displaying a single post
                     $post_id = $post['post_id'];
                     echo "
             <div class=\"post\">
+                <a href=\"user.php?username=$username\" class=\"link\">
                 <div class=\"user-img\">
                     <div class=\"post-img-wrapper\">
                         <img src=\"$user_img\" class=\"profile-img-post\">
                     </div>
                     <div class=\"post-name-date\">
-                        <span class=\"username-post\">".$user->get_username()."</span><br>
+                        <span class=\"username-post link-username\">".$user->get_username()."</span><br>
                         <span class=\"date\">".$post['created_at']."</span>
                     </div>
                 </div>
+                </a>
                 <div class=\"post-content\">
                     <p class=\"post-text\">".$post['content']."</p>
                     <form action=\"\" method=\"GET\">

@@ -106,3 +106,7 @@ textarea{
     font-size: 12px;
     color: #b4b2b2;
 }
+
+.link:hover .link-username{
+    text-decoration: underline;
+}

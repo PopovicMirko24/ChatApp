@@ -2,7 +2,6 @@
 
 require_once 'connectionDB.php';
 $error_text = "";
-//$_SESSION['user_id'] = null;
 if(!$conn){
     die("Neuspesna konekcija sa bazom");  
 }
@@ -28,6 +27,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 }
 
+/*if(isset($_SESSION['user_id']))
+    $_SESSION['user_id'] = null;
+*/
 ?>
 
 <!DOCTYPE html>

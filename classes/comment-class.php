@@ -73,15 +73,17 @@ class Comment{
 
                 echo "
             <div class=\"comment\">
+            <a href=\"user.php?username=$username\" class=\"link\">
                 <div class=\"info-comment\">
                     <div class=\"img-wrapper\">
                         <img src=\"$img\" class=\"profile-img-conntent\">
                     </div>
                     <div class=\"info-text\">
-                        <span class=\"username-comment\">".$username."</span><br>
+                        <span class=\"username-comment link-username\">".$username."</span><br>
                         <span class=\"date-comment\">".$date."</span>
                     </div>
                 </div>
+                </a>
                 <div class=\"comment-content\">
                     <p class=\"comment-text\">".$conntent."</p>
                 </div>
