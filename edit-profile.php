@@ -99,7 +99,6 @@ if(array_key_exists('cancle', $_POST)){
     <script>
         function ucitajFile(){
             var file1 = document.getElementById("file");
-            var tal = document.getElementById("textarea");
             if(file1.files.length != 0 && file1.files[0].type.match(/image.*/)){
                 var fajl = file1.files[0];
                 var reader = new FileReader();

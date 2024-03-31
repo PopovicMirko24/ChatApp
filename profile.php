@@ -40,6 +40,10 @@ if(array_key_exists('comment', $_GET)) {
     header('location: post.php');
 }
 
+if(array_key_exists('delete', $_GET)){
+    Post::delete_Post($conn, $_GET['deleteHidden']);
+}
+
 
 ?>
 
@@ -51,6 +55,7 @@ if(array_key_exists('comment', $_GET)) {
     <title>Profile</title>
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/post.css">
 </head>
 <body>
     <div class="nav">
@@ -98,7 +103,7 @@ if(array_key_exists('comment', $_GET)) {
             <div class="new-post">
                 <form action="profile.php" method="POST" class="post-form">
                     <textarea class="textarea" name="content" id="content" cols="30" rows="10" placeholder="text..."></textarea>
-                    <input name="button-post" type="submit" value="post" class="button button-post">
+                    <input name="button-post" type="submit" value="post" class="button button-post" onchange='ucitajFile()'>
                 </form>
             </div>
             <div class="all-posts">

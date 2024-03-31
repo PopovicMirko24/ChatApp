@@ -200,6 +200,7 @@ textarea{
     color: #949494;
     font-size: 13px;
     letter-spacing: 1.5px;
+    display: inline-block;
 }
 
 .comment-button:hover{
@@ -295,4 +296,23 @@ textarea{
 
 .link:hover .link-username{
     text-decoration: underline;
+}
+
+#img{
+    width: 200px;
+}
+
+.delete-link{
+    display: inline-block;
+    overflow: hidden;
+    color: red;
+    transition: .3s;
+    margin-left: 390px;
+}
+
+.delete-link:hover{
+    display: inline-block;
+    overflow: hidden;
+    color: red;
+    font-weight: bolder;
 }

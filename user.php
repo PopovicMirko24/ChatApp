@@ -11,14 +11,20 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     header('location: search-users.php');
 }
 
+$user_nav = User::load_user_data($_SESSION['user_id'], $conn);
+
 if(isset($_GET['username'])) {
-    $username = $_GET['username'];
-    $username = str_replace("'", "", $username);
-    $user = User::load_user_data_by_username($username, $conn);
-    $img = $user->get_photo_path();
+    if($_GET['username'] != $user_nav->get_username()){
+        $username = $_GET['username'];
+        $username = str_replace("'", "", $username);
+        $user = User::load_user_data_by_username($username, $conn);
+        $img = $user->get_photo_path();
+    }else{
+        header('location: profile.php');
+    }
 }
 
-$user_nav = User::load_user_data($_SESSION['user_id'], $conn);
+
 
 if(array_key_exists('comment', $_GET)) {
     $_SESSION['post_id'] = $_GET['post_id'];
@@ -46,6 +52,7 @@ if(array_key_exists('follow', $_POST)){
     <title>Profile</title>
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/post.css">
     <script>
         function updateFollowButton() {
             const btn = document.getElementById("btn-follow");
@@ -97,10 +104,10 @@ if(array_key_exists('follow', $_POST)){
                         echo '
 
                         <div class="follow">
-                    <form action="" method="POST">
-                        <input name="follow" id="btn-follow" class="btn-follow" type="submit" value="">
-                    </form>
-                </div>
+                            <form action="" method="POST">
+                                <input name="follow" id="btn-follow" class="btn-follow" type="submit" value="">
+                            </form>
+                        </div>
 
                         ';
                 ?>

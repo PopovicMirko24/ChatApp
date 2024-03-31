@@ -95,37 +95,47 @@ class Post{
         $results = Post::get_posts_by_user($conn,$user_id);
         if($results->num_rows > 0){
             while($row = $results->fetch_assoc()) {
-                $posts[] = $row; // Append each fetched row to the $posts array
+                $posts[] = $row;
             }
 
 
             for($i = count($posts) - 1; $i >= 0; $i--){
                 $post = $posts[$i];
                 $post_id = $post['post_id'];
-                echo "
-            <div class=\"post\">
-                <div class=\"user-img\">
-                    <div class=\"post-img-wrapper\">
-                        <img src=\"$img\" class=\"profile-img-post\">
-                    </div>
-                    <div class=\"post-name-date\">
-                        <span class=\"username-post\">".$user->get_username()."</span><br>
-                        <span class=\"date\">".$post['created_at']."</span>
-                    </div>
-                </div>
-                <div class=\"post-content\">
-                    <p class=\"post-text\">".$post['content']."</p>
-                    <form action=\"\" method=\"GET\">
-                        <input type=\"hidden\" name=\"post_id\" value=\"$post_id\">
-                        <input class=\"comment-button\" name=\"comment\" type=\"submit\" value=\"comment\">
-                    </form>
-                </div>
-            </div>
-            ";
+                $location = $_SERVER['PHP_SELF'];
+                echo "<div class=\"post\">";
+                echo "<div class=\"user-img\">";
+                echo "<div class=\"post-img-wrapper\">";
+                echo "<img src=\"$img\" class=\"profile-img-post\">";
+                echo "</div>";
+                echo "<div class=\"post-name-date\">";
+                echo "<span class=\"username-post\">".$user->get_username()."</span><br>";
+                echo "<span class=\"date\">".$post['created_at']."</span>";
+                echo "</div>";
+                echo "</div>";
+                echo "<div class=\"post-content\">";
+                echo "<p class=\"post-text\">".$post['content']."</p>";
+                echo "<form action=\"\" method=\"GET\">";
+                echo "<input type=\"hidden\" name=\"post_id\" value=\"$post_id\">";
+                echo "<input class=\"comment-button\" name=\"comment\" type=\"submit\" value=\"comment\">";
+                if($location == "/socialmedia/profile.php"){
+                    echo "<a onClick=\" javascript:return confirm('Are you sure you want to delete this?'); \" class=\"delete-link\" href=\"delete.php?post_id=$post_id\"> delte </a>";
+                }
+                echo "</form>";
+                echo "</form>";
+                echo "</div>";
+                echo "</div>";
             }
         } else {
             echo '<p class="no-posts">no posts</p>';
         }
+    }
+
+    public static function delete_Post($conn, $post_id){
+        $sql = "DELETE FROM post WHERE post_id = $post_id";
+        $run = $conn->prepare($sql);
+        $run->execute();
+        return $run->get_result();
     }
 }
 
