@@ -24,10 +24,6 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     header('location: search-users.php');
 }
 
-if(array_key_exists('comment', $_GET)) {
-    $_SESSION['post_id'] = $_GET['post_id'];
-    header('location: post.php');
-}
 
 
 ?>
@@ -100,8 +96,7 @@ if(array_key_exists('comment', $_GET)) {
                 <div class=\"post-content\">
                     <p class=\"post-text\">".$post['content']."</p>
                     <form action=\"\" method=\"GET\">
-                        <input type=\"hidden\" name=\"post_id\" value=\"$post_id\">
-                        <input class=\"comment-button\" name=\"comment\" type=\"submit\" value=\"comment\">
+                        <a class=\"comment-link\" href=\"post.php?post_id=$post_id\"> comment </a>
                     </form>
                 </div>
             </div>

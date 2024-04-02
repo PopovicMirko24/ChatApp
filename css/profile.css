@@ -194,7 +194,7 @@ textarea{
     height: 130px;
 }
 
-.comment-button{
+.comment-link{
     background-color: transparent;
     border: none;
     color: #949494;
@@ -203,7 +203,7 @@ textarea{
     display: inline-block;
 }
 
-.comment-button:hover{
+.comment-link:hover{
     text-decoration: underline;
     color: white;
 }

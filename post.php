@@ -15,20 +15,22 @@ if(!isset($_SESSION['user_id'])){
     exit();
 }
 
-if(!isset($_SESSION['post_id'])){
+if(!isset($_GET['post_id'])){
     echo 'greska';
 }
+
+$post_id = $_GET['post_id'];
 
 $user =  User::load_user_data($_SESSION['user_id'], $conn);
 $comments_user_img = $user->get_photo_path();
 
-$post = Post::get_post_by_id($conn, $_SESSION['post_id']);
+$post = Post::get_post_by_id($conn, $post_id);
 $posts_user = User::load_user_data($post->get_user_id(), $conn);
 $posts_user_img = $posts_user->get_photo_path();
 $posts_user_id = $post->get_post_id();
 
 if(array_key_exists('new-comment', $_POST)) {
-    $comment = new Comment($_SESSION['post_id'], $_SESSION['user_id'], $_POST['comment-conntent']);
+    $comment = new Comment($post_id, $_SESSION['user_id'], $_POST['comment-conntent']);
     Comment::create_comment($conn, $comment);
 }
 
@@ -49,6 +51,7 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     <title>Document</title>
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/post.css">
+    <link rel="stylesheet" href="css/comments.css">
 </head>
 <body>
     <div class="nav">

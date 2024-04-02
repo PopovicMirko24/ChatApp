@@ -35,11 +35,6 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     header('location: search-users.php');
 }
 
-if(array_key_exists('comment', $_GET)) {
-    $_SESSION['post_id'] = $_GET['post_id'];
-    header('location: post.php');
-}
-
 if(array_key_exists('delete', $_GET)){
     Post::delete_Post($conn, $_GET['deleteHidden']);
 }

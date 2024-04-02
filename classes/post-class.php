@@ -116,10 +116,9 @@ class Post{
                 echo "<div class=\"post-content\">";
                 echo "<p class=\"post-text\">".$post['content']."</p>";
                 echo "<form action=\"\" method=\"GET\">";
-                echo "<input type=\"hidden\" name=\"post_id\" value=\"$post_id\">";
-                echo "<input class=\"comment-button\" name=\"comment\" type=\"submit\" value=\"comment\">";
+                echo "<a class=\"comment-link\" href=\"post.php?post_id=$post_id\"> comment </a>";
                 if($location == "/socialmedia/profile.php"){
-                    echo "<a onClick=\" javascript:return confirm('Are you sure you want to delete this?'); \" class=\"delete-link\" href=\"delete.php?post_id=$post_id\"> delte </a>";
+                    echo "<a onClick=\" javascript:return confirm('Are you sure you want to delete this?'); \" class=\"delete-link\" href=\"delete-post.php?post_id=$post_id\"> delte </a>";
                 }
                 echo "</form>";
                 echo "</form>";

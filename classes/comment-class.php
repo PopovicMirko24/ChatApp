@@ -62,6 +62,7 @@ class Comment{
 
             for($i = count($comments) - 1; $i >= 0; $i--){
                 $comment = $comments[$i];
+                $comment_id = $comment['comment_id'];
                 $post_id = $comment['post_id'];
                 $username = $comment['username'];
                 $date = $comment['created_at'];
@@ -71,28 +72,36 @@ class Comment{
                     $img = $comment['photo_path'];
                 }
 
-                echo "
-            <div class=\"comment\">
-            <a href=\"user.php?username=$username\" class=\"link\">
-                <div class=\"info-comment\">
-                    <div class=\"img-wrapper\">
-                        <img src=\"$img\" class=\"profile-img-conntent\">
-                    </div>
-                    <div class=\"info-text\">
-                        <span class=\"username-comment link-username\">".$username."</span><br>
-                        <span class=\"date-comment\">".$date."</span>
-                    </div>
-                </div>
-                </a>
-                <div class=\"comment-content\">
-                    <p class=\"comment-text\">".$conntent."</p>
-                </div>
-            </div>
-            ";
+                
+                echo "<div class=\"comment\">";
+                echo "<a href=\"user.php?username=$username\" class=\"link\">";
+                echo "<div class=\"info-comment\">";
+                echo "<div class=\"img-wrapper\">";
+                echo "<img src=\"$img\" class=\"profile-img-conntent\">";
+                echo "</div>";
+                echo "<div class=\"info-text\">";
+                echo "<span class=\"username-comment link-username\">".$username."</span><br>";
+                echo "<span class=\"date-comment\">".$date."</span>";
+                echo "</div>";
+                echo "</div>";
+                echo "</a>";
+                echo "<div class=\"comment-content\">";
+                echo "<p class=\"comment-text\">".$conntent."</p>";
+                if($_SESSION['user_id'] === $comment['user_id'])
+                    echo "<a onClick=\" javascript:return confirm('Are you sure you want to delete this?'); \" class=\"delete-link\" href=\"delete-comment.php?comment_id=$comment_id\"> delte </a>";
+                echo "</div>";
+                echo "</div>";
             }
         } else {
             echo '<p class="no-comments">no comments</p>';
         }
+    }
+
+    public static function delete_comment($conn, $comment_id){
+        $sql = "DELETE FROM comment WHERE comment_id = $comment_id";
+        $run = $conn->prepare($sql);
+        $run->execute();
+        return $run->get_result();
     }
 }
 
