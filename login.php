@@ -13,7 +13,7 @@ if(isset($_SERVER['user_id'])){
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $username = $_POST['username'];
 
-    $sql_username = 'select user_id, password from user where username = ?';
+    $sql_username = 'select user_id, password, admin from user where username = ?';
     $run = $conn -> prepare($sql_username);
     $run -> bind_param('s', $username);
     $run -> execute();
@@ -22,7 +22,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $user = $results -> fetch_assoc();
         if(password_verify($_POST['password'], $user['password'])){
             $_SESSION['user_id'] = $user['user_id'];
-            header('location: profile.php');
+            if(!$user['admin'])
+                header('location: profile.php');
+            else
+                header('location: admin-deashboard.php');
         }else{
             $error_text = 'wrong password';
         }

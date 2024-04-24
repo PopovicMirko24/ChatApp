@@ -125,7 +125,7 @@ class Post{
                 echo "</div>";
             }
         } else {
-            echo '<p class="no-posts">no posts</p>';
+            echo '<div class="no-post"><p class="no-posts">no posts</p></div>';
         }
     }
 

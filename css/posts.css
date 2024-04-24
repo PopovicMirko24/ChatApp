@@ -96,3 +96,14 @@
     border: 1px lime solid;
     color: lime;
 }
+
+.no-post{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 20px;
+    background-color: #171c24;
+}
