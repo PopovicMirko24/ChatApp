@@ -5,6 +5,7 @@ require_once 'classes/user-class.php';
 require_once 'classes/post-class.php';
 require_once 'classes/search-class.php';
 require_once 'classes/following-class.php';
+require_once 'nav.php';
 
 if(!$conn){
     die("Neuspesna konekcija sa bazom");  
@@ -23,7 +24,7 @@ if(array_key_exists('button-post', $_POST)) {
     if($_POST['content'] == null || $_POST['content'] == ""){
         echo "<script> alert('Post is empty'); </script>";
     }else{
-        $post = new Post($user->get_id(), $_POST['content']);
+        $post = new Post($_SESSION['user_id'], $_POST['content']);
         Post::create_post($conn,$post);
     }
 }
@@ -49,75 +50,47 @@ if(array_key_exists('delete', $_GET)){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="css/profile.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/post.css">
+    <link rel="stylesheet" href="css/posts.css">
 </head>
 <body>
-    <div class="nav">
-        <span class="logo"><a href="home.php">social media</a></span>
-        <ul class="nav-links">
-            <li class="center"><a href="#"><?php echo $user->get_username() ?></a></li>
-            <li class="center"><a href="login.php">logout</a></li>
-            <li>
-                <form action="" method="GET">
-                    <input class="text-input" type="text" name="search-input" id="search" placeholder="search">
-                    <input type="submit" class="button" value="search" name="search">
-                </form>
-            </li>
-        </ul>
-    </div>
-    <section class="user-info">
-        <div class="container">
-            <ul class="info-list">
-                <li>
-                    <div class="img-wrapper">
-                        <img class="profile-img" src="<?php echo $user->get_photo_path(); ?>" alt="">
-                    </div>
-                </li>
-                <li class="info">
-                    <div class="name">
-                        <h3 class="username"><?php echo $user->get_username(); ?></h3>
-                        <span><?php echo $user->get_name(); ?></span>
-                        <span><?php echo $user->get_lastname(); ?></span>
-                    </div>
-                    <div class="description">
-                        <span><?php echo $user->get_description() ?></span>
-                    </div>
-                </li>
-                <li>
-                    <div class="edit">
+    <div class="section">
+        <div class="common-div">
+            <div class="user">
+                <ul class="user-info">
+                    <li>
+                        <div class="img-wrapper" style=" background-image: url(' <?php echo $user->get_photo_path() ?> '); background-size: cover; background-repeat: no-repeat; background-position: center;"></div><br>
+                        <h3><?php echo $user->get_username() ?></h3>
+                    </li>
+                    <li>
+                        <?php echo $user->get_name() ." " .$user->get_lastname() ?><br>
+                    </li>
+                    <li>
+                        <p class="description"><?php echo $user->get_description() ?></p>
+                    </li>
+                    <li class="li-edit">
                         <a href="edit-profile.php" class="edit-button">edit profile</a>
-                    </div>
-                </li>
-            </div>
-        </ul>
-    </section>
-    <section class="posts">
-        <div class="content">
-        <div class="container-posts container1">
-            <div class="new-post">
-                <form action="profile.php" method="POST" class="post-form">
-                    <textarea class="textarea" name="content" id="content" cols="30" rows="10" placeholder="text..."></textarea>
-                    <input name="button-post" type="submit" value="post" class="button button-post" onchange='ucitajFile()'>
-                </form>
-            </div>
-            <div class="all-posts">
-                <?php
-                    Post::show_posts($conn, $user, $img);
-                ?>
-            </div>
-        </div>
-        <div class="f-container">
-            <div class="followings f-content">
-                <h1>Followings</h1>
+                    </li>
+                </ul>
+            </div><br>
+            <div class="following">
+                <h3>following</h3>
                 <?php Following::show_following($conn, $_SESSION['user_id']); ?>
             </div>
-            <div class="followers f-content">
-                <h1>Followers</h1>
+            <div class="following">
+                <h3>followers</h3>
                 <?php Following::show_followers($conn, $_SESSION['user_id']); ?>
             </div>
         </div>
+
+    <div class="common-div post-section">
+        <div class="new-post">
+            <form method="POST">
+                <textarea name="content" id="" cols="30" rows="10" placeholder="text..."></textarea>
+                <input name="button-post" class="button-post button" type="submit" value="post">
+            </form>
         </div>
-    </section>
+        <?php Post::show_posts($conn, $user, $img); ?>
+    </div>
+    </div>
 </body>
 </html>

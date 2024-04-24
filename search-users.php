@@ -34,22 +34,9 @@ $name = $user->get_name() ." " .$user->get_lastname();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>search</title>
     <link rel="stylesheet" href="css/search.css">
-    <link rel="stylesheet" href="css/nav.css">
 </head>
 <body>
-    <div class="nav">
-        <span class="logo"><a href="home.php">social media</a></span>
-        <ul class="nav-links">
-            <li class="center"><a href="profile.php"><?php echo $user->get_username() ?></a></li>
-            <li class="center"><a href="login.php">logout</a></li>
-            <li>
-                <form action="" method="GET">
-                    <input class="text-input" type="text" name="search-input" id="search" placeholder="search">
-                    <input type="submit" class="button" value="search" name="search">
-                </form>
-            </li>
-        </ul>
-    </div>
+    <?php require_once 'nav.php'; ?>
     <section class="profiles">
         <?php Search::search_users($conn, $_SESSION['search_username']); ?>
     </section>

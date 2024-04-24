@@ -49,28 +49,15 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/post.css">
     <link rel="stylesheet" href="css/comments.css">
 </head>
 <body>
-    <div class="nav">
-        <span class="logo"><a href="home.php">social media</a></span>
-        <ul class="nav-links">
-            <li class="center"><a href="profile.php"><?php echo $user->get_username() ?></a></li>
-            <li class="center"><a href="login.php">logout</a></li>
-            <li>
-                <form action="" method="GET">
-                    <input class="text-input" type="text" name="search-input" id="search" placeholder="search">
-                    <input type="submit" class="button" value="search" name="search">
-                </form>
-            </li>
-        </ul>
-    </div>
+    <?php require_once 'nav.php'; ?>
     <section>
         <div class="post">
             <div class="info">
-                <div class="img-wrapper"><img class="post_img" src="<?php echo $posts_user_img; ?>" alt=""></div>
+                <?php echo "<div class=\"img-wrapper\" style=\" background-image: url('$posts_user_img'); background-size: cover; background-repeat: no-repeat; background-position: center;\"></div>"?>
                 <div class="text-wrapper">
                     <span class="username"><?php echo $posts_user->get_username(); ?></span><br>
                     <span class="date"><?php echo $post->get_date(); ?></span>
@@ -83,11 +70,11 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
         <div class="comments post">
             <div class="new-comment">
                 <form action="" method="POST">
-                    <textarea name="comment-conntent" id="" cols="30" rows="10" placeholder="comment"></textarea>
-                    <input name="new-comment" class="button-post button" type="submit" value="post">
+                    <textarea name="comment-conntent" id="" cols="30" rows="10" placeholder="text..."></textarea>
+                    <input name="new-comment" class="button-post" type="submit" value="post">
                 </form>
             </div>
-            <?php Comment::show_comments($conn, $_SESSION['post_id']); ?>
+            <?php Comment::show_comments($conn, $_GET['post_id']); ?>
         </div>
     </section>
 </body>

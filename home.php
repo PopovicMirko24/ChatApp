@@ -37,22 +37,12 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/posts.css">
+
 </head>
 <body>
-    <div class="nav">
-        <span class="logo"><a href="home.php">social media</a></span>
-        <ul class="nav-links">
-            <li class="center"><a href="profile.php"><?php echo $user->get_username() ?></a></li>
-            <li class="center"><a href="login.php">logout</a></li>
-            <li>
-                <form action="" method="GET">
-                    <input class="text-input" type="text" name="search-input" id="search" placeholder="search">
-                    <input type="submit" class="button" value="search" name="search">
-                </form>
-            </li>
-        </ul>
-    </div>
+    <?php require_once 'nav.php'; ?>
     <div class="section" style="padding-top: 100px;">
         <?php
             if(Following::get_all_followings($conn, $user->get_id())){
@@ -84,8 +74,7 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
             <div class=\"post\">
                 <a href=\"user.php?username=$username\" class=\"link\">
                 <div class=\"user-img\">
-                    <div class=\"post-img-wrapper\">
-                        <img src=\"$user_img\" class=\"profile-img-post\">
+                    <div class=\"post-img-wrapper\" style=\" background-image: url('".$user_img."'); background-size: cover; background-repeat: no-repeat; background-position: center;\">
                     </div>
                     <div class=\"post-name-date\">
                         <span class=\"username-post link-username\">".$user->get_username()."</span><br>

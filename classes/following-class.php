@@ -38,8 +38,7 @@ class Following{
         $followings = array();
         while ($row = $results->fetch_assoc()) {
             $followings[] = $row['user2_id'];
-        }   
-    
+        }
         return $followings;
     }
 
@@ -65,8 +64,8 @@ class Following{
             echo '
             <a href="user.php?username=' . $username . '" class="link">
             <div class="users">
-                <div class="img-wrapper-following"><img src="' . $img . '" alt="" class="following-img"></div>
-                <div class="following-username"><p class="following-username link-username">' . $username . '</p></div>       
+            <div class="img-wrapper-following" style=" background-image: url(\''.$img.'\'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+                <div class="following-username"><p class="following-username link-username">'.$username.'</p></div>       
             </div></a>
             ';
         }
@@ -85,7 +84,7 @@ class Following{
                 echo '
                 <a href="user.php?username=' . $username . '" class="link">
                 <div class="users">
-                    <div class="img-wrapper-following"><img src="' . $img . '" alt="" class="following-img"></div>
+                    <div class="img-wrapper-following" style=" background-image: url(\''.$img.'\'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                     <div class="following-username"><p class="following-username link-username">' . $username . '</p></div>       
                 </div></a>
                 ';

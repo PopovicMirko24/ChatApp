@@ -105,8 +105,7 @@ class Post{
                 $location = $_SERVER['PHP_SELF'];
                 echo "<div class=\"post\">";
                 echo "<div class=\"user-img\">";
-                echo "<div class=\"post-img-wrapper\">";
-                echo "<img src=\"$img\" class=\"profile-img-post\">";
+                echo "<div class=\"post-img-wrapper\" style=\" background-image: url('$img'); background-size: cover; background-repeat: no-repeat; background-position: center;\">";
                 echo "</div>";
                 echo "<div class=\"post-name-date\">";
                 echo "<span class=\"username-post\">".$user->get_username()."</span><br>";

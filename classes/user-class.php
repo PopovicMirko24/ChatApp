@@ -75,7 +75,7 @@ class User{
         $results = $run -> get_result();
         $user = $results -> fetch_assoc();
     
-        $img = "images\common_immage.webp";
+        $img = "images/comon.webp";
         $description = "no description";
         if($user['photo_path'] != null){
             $img = $user['photo_path'];
@@ -99,10 +99,10 @@ class User{
         $results = $run->get_result();
         $user = $results->fetch_assoc();
     
-        $img = "images\common_immage.webp";
+        $img = "images/comon.webp";
         $description = "no description";
         if($user !== null) {
-            if($user['photo_path'] != null){
+            if($user['photo_path']){
                 $img = $user['photo_path'];
             }
     
@@ -127,7 +127,7 @@ class User{
         if($results->num_rows > 0){
             $user = $results -> fetch_assoc();
     
-            $img = "images\common_immage.webp";
+            $img = "images/comon.webp";
             $description = "no description";
         
             if($user['photo_path'] != null){

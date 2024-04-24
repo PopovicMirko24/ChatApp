@@ -23,7 +23,7 @@ class Search{
         $results= $run->get_result();
         if($results->num_rows > 0){
             $search = $results->fetch_assoc();
-            $img = "images\common_immage.webp";
+            $img = "images/comon.webp";
             if($search['photo_path'] != null){
                 $img = $search['photo_path'];
             }
@@ -31,7 +31,7 @@ class Search{
             echo "
             <a href=\"user.php?username='$username'\">
                 <div class=\"profile\">
-                    <div class=\"img-wrapper\"><img src=\"$img\"></div>
+                    <div class=\"img-wrapper\" style=\" background-image: url('$img'); background-size: cover; background-repeat: no-repeat; background-position: center;\"></div>
                     <div class=\"info\">
                         <h3 class=\"username\">" . $search['username'] . "</h3>
                         <span class=\"name\">" . $search['name'] . " " . $search['last_name'] . "</span>

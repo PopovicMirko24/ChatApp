@@ -59,7 +59,6 @@ class Comment{
                 $comments[] = $row; // Append each fetched row to the $posts array
             }
 
-
             for($i = count($comments) - 1; $i >= 0; $i--){
                 $comment = $comments[$i];
                 $comment_id = $comment['comment_id'];
@@ -67,7 +66,7 @@ class Comment{
                 $username = $comment['username'];
                 $date = $comment['created_at'];
                 $conntent = $comment['conntent'];
-                $img = 'images\common_immage.webp';
+                $img = 'images/common.webp';
                 if($comment['photo_path']){
                     $img = $comment['photo_path'];
                 }

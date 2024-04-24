@@ -25,7 +25,6 @@ if(isset($_GET['username'])) {
 }
 
 
-
 if(array_key_exists('comment', $_GET)) {
     $_SESSION['post_id'] = $_GET['post_id'];
     header('location: post.php');
@@ -51,8 +50,55 @@ if(array_key_exists('follow', $_POST)){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="css/profile.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/post.css">
+    <link rel="stylesheet" href="css/posts.css">
+    <link rel="stylesheet" href="css/user.css">
+</head>
+<body>
+    <?php require_once 'nav.php'; ?>
+    <div class="section">
+        <div class="common-div">
+            <div class="user">
+                <ul class="user-info">
+                    <li>
+                        <div class="img-wrapper" style=" background-image: url(' <?php echo $img ?> '); background-size: cover; background-repeat: no-repeat; background-position: center;"></div><br>
+                        <h3><?php echo $user->get_username() ?></h3>
+                    </li>
+                    <li>
+                        <?php echo $user->get_name() ." " .$user->get_lastname() ?><br>
+                    </li>
+                    <li>
+                        <p class="description"><?php echo $user->get_description() ?></p>
+                    </li>
+                    <li class="li-edit">
+                    <?php
+                    if($_SESSION['user_id'] != $user->get_id())
+                        echo '
+
+                        <div class="follow">
+                            <form action="" method="POST">
+                                <input name="follow" id="btn-follow" class="follow-button" type="submit" value="">
+                            </form>
+                        </div>
+
+                        ';
+                ?>
+                    </li>
+                </ul>
+            </div><br>
+            <div class="following">
+                <h3>following</h3>
+                <?php Following::show_following($conn, $user->get_id()); ?>
+            </div>
+            <div class="following">
+                <h3>followers</h3>
+                <?php Following::show_followers($conn, $user->get_id()); ?>
+            </div>
+        </div>
+
+    <div class="common-div post-section">
+        <?php Post::show_posts($conn, $user, $img); ?>
+    </div>
+    </div>
     <script>
         function updateFollowButton() {
             const btn = document.getElementById("btn-follow");
@@ -66,62 +112,5 @@ if(array_key_exists('follow', $_POST)){
         }
         window.onload = updateFollowButton;
     </script>
-</head>
-<body>
-    <div class="nav">
-        <span class="logo"><a href="home.php">social media</a></span>
-        <ul class="nav-links">
-            <li class="center"><a href="profile.php"><?php echo $user_nav->get_username() ?></a></li>
-            <li class="center"><a href="login.php">logout</a></li>
-            <li>
-                <form action="" method="GET">
-                    <input class="text-input" type="text" name="search-input" id="search" placeholder="search">
-                    <input type="submit" class="button" value="search" name="search">
-                </form>
-            </li>
-        </ul>
-    </div>
-    <section class="user-info">
-        <div class="container">
-            <ul class="info-list">
-                <li>
-                    <div class="img-wrapper">
-                        <img class="profile-img" src="<?php echo $user->get_photo_path(); ?>" alt="">
-                    </div>
-                </li>
-                <li class="info">
-                    <div class="name">
-                        <h3 class="username"><?php echo $user->get_username(); ?></h3>
-                        <span><?php echo $user->get_name(); ?></span>
-                        <span><?php echo $user->get_lastname(); ?></span>
-                    </div>
-                    <div class="description">
-                        <span><?php echo $user->get_description() ?></span>
-                    </div>
-                </li>
-                <?php
-                    if($_SESSION['user_id'] != $user->get_id())
-                        echo '
-
-                        <div class="follow">
-                            <form action="" method="POST">
-                                <input name="follow" id="btn-follow" class="btn-follow" type="submit" value="">
-                            </form>
-                        </div>
-
-                        ';
-                ?>
-        </div>
-        </ul>
-    </section>
-    <section class="posts">
-        <div class="container-posts">
-            <div class="all-posts">
-                <?php
-                    Post::show_posts($conn, $user, $img);
-                ?>
-            </div>
-        </div>
-    </section>
 </body>
 </html>

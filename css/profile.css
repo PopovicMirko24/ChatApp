@@ -1,318 +1,114 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Space+Grotesk&display=swap');
 
-*{
+* {
     font-family: "Comfortaa", sans-serif;
     color: white;
 }
 
-div{
-    border-radius: 10px;
+body {
+    background-color: rgb(7, 7, 7);
 }
 
-body{
-    padding: 0;
-    margin: 0;
-    margin-bottom: 10px;
-
-    background-color: rgb(11, 11, 11);
-}
-
-.background{
-    width: 100%;
-    height: 100%;
-    background-image: url('back.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-a{
-    text-decoration: none;
-    color: white;
-    font-weight: 100;
-}
-
-section{
-    width: 100%;
-    padding-top: 100px ;
-}
-
-.container{
-    width: 60%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-
-    background-color: #222222;
-    align-items: center;
-
-    padding: 10px 20px;
-}
-
-.img-wrapper{
+.common-div {
+    padding: 40px;
+    width: 24%;
     display: inline-block;
-    margin-right: 40px;
-    width: 170px;
-    height: 170px;
-    overflow: hidden;
+    margin-left: 50px;
 }
 
-.username{
-    font-weight: 200;
-    font-size: 25px;
-    margin-bottom: 10px;
-}
-
-.description{
-    font-size: 14px;
-    font-weight: 100;
-    margin-top: 20px;
-    padding-bottom: 70px;
-    overflow: hidden;
-    color: #b4b2b2;
-}
-
-.name{
-    display: inline-block;
-    overflow: hidden;
-}
-
-.profile-img{
+.user {
+    padding: 10px;
     width: 100%;
+    background-color: #171c24;
+    border-radius: 20px;
 }
 
-.edit{
-    display: inline-block;
-    overflow: hidden;
-    padding-top: 10px;
-    padding-bottom: 80px;
-}
-
-.edit-button{
-    background-color: rgba(29, 28, 28, 0.368);
-    padding: 10px 20px;
-    color: rgba(255, 255, 255, 0.592);
-}
-
-.edit-button:hover{
-    color: white;
-    background-color: rgba(255, 255, 255, 0.067);
-}
-
-.info-list{
-    display: block;
-    margin: 0;
-    padding: 0;
+.user-info {
     list-style: none;
-    text-decoration: none;
 }
 
-.info{
-    width: 60%;
-}
-
-.posts{
-    padding: 0;
-    margin-top: 40px;
-}
-
-.container-posts{
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #222222;
-    padding: 20px;
-}
-
-.new-post{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
-textarea{
-    width: 95%;
-    background-color: #171616;
-    padding: 10px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.button-post{
-    margin-left: 20px;
-    margin-top: 10px;
-}
-
-.post-form{
-    border-bottom: #2c2c2c 1px solid;
-    padding-bottom: 20px;
-    align-items: center;
-}
-
-.profile-img-post{
-    width: 30px;
-}
-
-.username-post{
-    font-size: 14px;
-}
-
-.user-img{
-    width: 100%;
-}
-
-.post-img-wrapper{
-    display: inline-block;
-}
-
-.post-name-date{
-    display: inline-block;
-}
-
-.date{
-    font-size: 12px;
-    color: #b4b2b2;
-}
-
-.post{
-    padding: 20px;
-}
-
-
-.post-content{
-    border-bottom: #2c2c2c 1px solid;
-    padding-bottom: 20px;
-    overflow: hidden;
-    height: 200px;
-}
-
-.post-text{
-    background-color: #323232;
-    padding: 10px;
-    width: 100%;
-    height: 130px;
-}
-
-.comment-link{
-    background-color: transparent;
-    border: none;
-    color: #949494;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    display: inline-block;
-}
-
-.comment-link:hover{
-    text-decoration: underline;
-    color: white;
-}
-
-.no-posts{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    color: rgb(164, 164, 164);
-    width: 20%;
-}
-
-.follow{
-    display: inline-block;
-    overflow: hidden;
-    padding-top: 10px;
-    padding-bottom: 80px;
-}
-
-.btn-follow{
-    background-color: rgba(29, 28, 28, 0.368);
-    padding: 10px 20px;
-    color: rgba(255, 255, 255, 0.592);
-    border: none;
-    font-size: 15px;
-}
-
-.btn-follow:hover{
-    color: white;
-    background-color: rgba(255, 255, 255, 0.067);
-}
-
-.content{
-    width: 62.5%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.container1{
-    display: inline-block;
-    width: 60%;
-    vertical-align: top;
-}
-
-.f-container{
-    display: inline-block;
-    width: 34.1%;
-    margin-left: 10px;
-}
-
-.f-container h1{
-    width: 100%;
+.user-info li {
     text-align: center;
-    color: #b4b2b2;
-    font-size: 15px;
+    width: 100%;
+    padding: 15px 0;
     letter-spacing: 1px;
 }
 
-.f-content{
-    background-color: #222222;
-    padding: 15px;
-    border-radius: 10px;
-    margin-left: 10px;
-    height: 37vh;
-    overflow-y: scroll;
-    scrollbar-color: rgba(0, 0, 0, 0.188);
+.img-wrapper {
+    border-radius: 100%;
+    width: 180px;
+    height: 180px;
+    margin-left: 40px;
 }
 
-.followers{
+.description {
+    color: rgba(202, 202, 202, 0.874);
+}
+
+.edit-button {
+    padding: 5px 10px;
+    color: rgba(202, 202, 202, 0.874);;
+    text-decoration: none;
+    background-color: rgba(153, 153, 153, 0.326);
+}
+
+.edit-button:hover {
+    padding: 7px 10px;
+    color: rgba(255, 255, 255, 0.959);;
+    text-decoration: none;
+    background-color: rgba(85, 85, 85, 0.595);
+}
+
+.following {
+    overflow-y: scroll;
+    height: 400px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    background-color: #171c24;
+    border-radius: 20px;
+}
+
+.following::-webkit-scrollbar {
+    opacity: 0;
+}
+
+.following h3 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.img-wrapper-following {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+.users {
     margin-top: 10px;
 }
 
-.following-img{
-    width: 50px;
-}
-
-.img-wrapper-following{
+.following-username {
     display: inline-block;
     overflow: hidden;
-    width: 50px;
-    padding: 1px;
-    border-radius: none;
-}
-
-.following-username{
-    display: inline-block;
-    overflow: hidden;
+    padding-bottom: 5px;
     margin-left: 5px;
 }
 
-.link:hover .link-username{
-    text-decoration: underline;
+.following-username a {
+    text-decoration: none;
 }
 
-#img{
-    width: 200px;
+.post-section {
+    width: 65%;
+    float: right;
+    margin-right: 100px;
+    margin-left: 0;
 }
 
-.delete-link{
-    display: inline-block;
-    overflow: hidden;
-    color: red;
-    transition: .3s;
-    margin-left: 390px;
-}
-
-.delete-link:hover{
-    display: inline-block;
-    overflow: hidden;
-    color: red;
-    font-weight: bolder;
+.section {
+    display: flex;
+    justify-content: space-between;
 }

@@ -6,6 +6,10 @@ if(!$conn){
     die("Neuspesna konekcija sa bazom");  
 }
 
+if(isset($_SERVER['user_id'])){
+    header('location: profile.php');
+}
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $username = $_POST['username'];
 
