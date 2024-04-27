@@ -11,7 +11,7 @@ if(!$conn){
     die("Neuspesna konekcija sa bazom");  
 }
 
-if(!isset($_SESSION['user_id'])){
+if(!isset($_SESSION['user_id']) || $_SESSION['user_id'] == null){
     header('location: login.php');
     exit();
 }

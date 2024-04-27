@@ -18,7 +18,7 @@
          <div class="nav-items">
             <li><a href="home.php">Home</a></li>
             <li><a href="profile.php">Profile</a></li>
-            <li><a href="login.php">Logout</a></li>
+            <li><a href="logout.php">Logout</a></li>
          </div>
          <div class="search-icon">
             <span class="fas fa-search"></span>

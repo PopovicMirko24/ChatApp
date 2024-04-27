@@ -6,10 +6,6 @@ if(!$conn){
     die("Neuspesna konekcija sa bazom");  
 }
 
-if(isset($_SERVER['user_id'])){
-    header('location: profile.php');
-}
-
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $username = $_POST['username'];
 
@@ -33,10 +29,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $error_text = "username does not exist";
     }
 }
-
-/*if(isset($_SESSION['user_id']))
-    $_SESSION['user_id'] = null;
-*/
 ?>
 
 <!DOCTYPE html>

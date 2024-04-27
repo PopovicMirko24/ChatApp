@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Space+Grotesk&display=swap');
+
+* {
+    font-family: "Comfortaa", sans-serif;
+    color: white;
+}
+
+body {
+    background-color: rgb(7, 7, 7);
+}

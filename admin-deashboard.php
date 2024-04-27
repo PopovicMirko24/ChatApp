@@ -1,3 +1,10 @@
+<?php
+
+require_once 'connectionDB.php';
+require_once 'classes/user-class.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +13,12 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="admin-data">
+    </div>
+    <div class="users">
+        <table border="1">
+            <?php User::show_all_users($conn); ?>
+        </table>
+    </div>
 </body>
 </html>
