@@ -16,9 +16,13 @@ if(!isset($_SESSION['user_id']) || $_SESSION['user_id'] == null){
     exit();
 }
 
+
+
 $user =  User::load_user_data($_SESSION['user_id'], $conn);
 $img = $user->get_photo_path();
 
+if($user->get_admin())
+    header('location: admin-deashboard.php');
 
 if(array_key_exists('button-post', $_POST)) { 
     if($_POST['content'] == null || $_POST['content'] == ""){
@@ -28,8 +32,6 @@ if(array_key_exists('button-post', $_POST)) {
         Post::create_post($conn,$post);
     }
 }
-
-
 
 if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     $_SESSION['search_username'] = $_GET['search-input'];

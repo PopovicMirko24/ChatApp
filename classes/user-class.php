@@ -9,8 +9,9 @@ class User{
     private $email;
     private $photo_path;
     private $description;
+    private $admin;
 
-    function __construct($id,$name,$lastname,$username, $email,$photo_path,$description){
+    function __construct($id,$name,$lastname,$username, $email,$photo_path,$description, $amdin){
         $this->id = $id;
         $this->name = $name;
         $this->lastname = $lastname;
@@ -18,6 +19,7 @@ class User{
         $this->email = $email;
         $this->photo_path = $photo_path;
         $this->description = $description;
+        $this->admin = $amdin;
     }
 
     public function get_id(){
@@ -67,8 +69,12 @@ class User{
         $this->description = $description;
     }
 
+    public function get_admin(){
+        return $this->admin;
+    }
+
     public static function load_user_data($user_id, $conn){
-        $sql_user = 'select name, username, last_name, email, user_id, photo_path, description from user where user_id = ?';
+        $sql_user = 'select name, username, last_name, email, user_id, photo_path, description, admin from user where user_id = ?';
         $run = $conn ->prepare($sql_user);
         $run -> bind_param("i", $user_id);
         $run -> execute();
@@ -85,11 +91,11 @@ class User{
             $description = $user['description'];
         }
 
-        return new User($user_id, $user['name'], $user['last_name'], $user['username'],$user['email'], $img, $description);
+        return new User($user_id, $user['name'], $user['last_name'], $user['username'],$user['email'], $img, $description,$user['admin']);
     }
 
     public static function load_user_data_by_username($username, $conn){
-        $sql_user = "SELECT name, username, last_name, email, user_id, photo_path, user_id, description FROM User WHERE username = ?";
+        $sql_user = "SELECT name, username, last_name, email, user_id, photo_path, user_id, description, admin FROM User WHERE username = ?";
         $run = $conn->prepare($sql_user);
        $run->bind_param("s", $username); // Use "s" for string parameter
         $run->execute();
@@ -110,7 +116,7 @@ class User{
                 $description = $user['description'];
             }
         
-            return new User($user['user_id'], $user['name'], $user['last_name'], $user['username'], $username, $img, $description);
+            return new User($user['user_id'], $user['name'], $user['last_name'], $user['username'], $username, $img, $description, $user['admin']);
         } else {
             return null; // Return null if no user found
         }
@@ -118,7 +124,7 @@ class User{
     
     
     public static function search_user($username, $conn){
-        $sql_user = 'select name, username, last_name, email, user_id, photo_path, description, user_id from user where username = ?';
+        $sql_user = 'select name, username, last_name, email, user_id, photo_path, description, user_id,admin from user where username = ?';
         $run = $conn ->prepare($sql_user);
         $run -> bind_param("i", $username);
         $run -> execute();
@@ -138,7 +144,7 @@ class User{
                 $description = $user['description'];
             }
 
-            return new User($user['user_id'], $user['name'], $user['last_name'], $user['username'],$user['email'], $img, $description);
+            return new User($user['user_id'], $user['name'], $user['last_name'], $user['username'],$user['email'], $img, $description,$user['admin']);
         }else{
             return null;
         }
@@ -201,7 +207,7 @@ class User{
                     echo "<td>". $users[$i]['email']. "</td>";
                     echo "<td>". $users[$i]['description']. "</td>";
                     echo "<td> <a href=\"user.php?username=". $users[$i]['username'] ."\"> view </td>";
-                    echo "<td> <a href=\"delete_user.php\"> delete </td>";
+                    echo "<td> <a onClick=\" javascript:return confirm('Are you sure you want to delete this?');\" href=\"delete-user.php?user_id=".$users[$i]['user_id']."\" > delete </td>";
                     echo "</tr>";
                 }
             }
