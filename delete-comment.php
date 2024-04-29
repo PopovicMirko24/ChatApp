@@ -15,7 +15,7 @@ if(!$_GET['comment_id']){
 $result = Comment::delete_comment($conn, $_GET["comment_id"]);
 if(!$result){
     echo "<script>alert('Error');</script>";
-    header('Location: post.php');
+    header('Location: post.php?post_id'.$_SESSION['post_id']);
 }
 
 ?>

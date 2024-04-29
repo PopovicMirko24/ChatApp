@@ -89,7 +89,7 @@ class Post{
     
     
 
-    public static function show_posts($conn, $user, $img){
+    public static function show_posts($conn, $user, $img, $user2){
         $posts = array();
         $user_id = $user->get_id();
         $results = Post::get_posts_by_user($conn,$user_id);
@@ -116,7 +116,7 @@ class Post{
                 echo "<p class=\"post-text\">".$post['content']."</p>";
                 echo "<form action=\"\" method=\"GET\">";
                 echo "<a class=\"comment-link\" href=\"post.php?post_id=$post_id\"> comment </a>";
-                if($location == "/socialmedia/profile.php"){
+                if($location == "/socialmedia/profile.php" || $user2->get_admin()){
                     echo "<a onClick=\" javascript:return confirm('Are you sure you want to delete this?'); \" class=\"delete-link\" href=\"delete-post.php?post_id=$post_id\"> delte </a>";
                 }
                 echo "</form>";

@@ -6,6 +6,8 @@ if(!$conn){
     die("Neuspesna konekcija sa bazom");  
 }
 
+$_SESSION['admin'] = false;
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $username = $_POST['username'];
 
@@ -20,8 +22,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_SESSION['user_id'] = $user['user_id'];
             if(!$user['admin'])
                 header('location: profile.php');
-            else
+            else{
+                $_SESSION['admin'] = true;
                 header('location: admin-deashboard.php');
+            }
         }else{
             $error_text = 'wrong password';
         }

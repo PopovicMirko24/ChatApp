@@ -20,6 +20,7 @@ if(!isset($_GET['post_id'])){
 }
 
 $post_id = $_GET['post_id'];
+$_SESSION['post_id'] = $post_id;
 
 $user =  User::load_user_data($_SESSION['user_id'], $conn);
 $comments_user_img = $user->get_photo_path();
@@ -34,12 +35,10 @@ if(array_key_exists('new-comment', $_POST)) {
     Comment::create_comment($conn, $comment);
 }
 
-
 if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     $_SESSION['search_username'] = $_GET['search-input'];
     header('location: search-users.php');
 } 
-
 
 ?>
 
@@ -68,13 +67,21 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
             </div>
         </div>
         <div class="comments post">
+            <?php
+            
+            if(!$user->get_admin()){
+                echo '
             <div class="new-comment">
                 <form action="" method="POST">
                     <textarea name="comment-conntent" id="" cols="30" rows="10" placeholder="text..."></textarea>
                     <input name="new-comment" class="button-post" type="submit" value="post">
                 </form>
             </div>
-            <?php Comment::show_comments($conn, $_GET['post_id']); ?>
+            ';
+            }
+            
+            ?>
+            <?php Comment::show_comments($conn, $_GET['post_id'], $user); ?>
         </div>
     </section>
 </body>

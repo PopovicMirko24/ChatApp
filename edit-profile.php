@@ -32,8 +32,9 @@ if(array_key_exists('cancle', $_POST)){
     $name = $_POST['name'];
     $lastname = $_POST['lastname'];
     if(isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+        $time = date("d-m-Y")."-". time() ;
         $file_tmp = $_FILES['file']['tmp_name'];
-        $file_name = basename($_FILES['file']['name']);
+        $file_name = $time."-".basename($_FILES['file']['name']);
         
         // Kreiranje direktorijuma ako ne postoji
         if (!file_exists($upload_dir)) {

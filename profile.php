@@ -91,7 +91,7 @@ if(array_key_exists('delete', $_GET)){
                 <input name="button-post" class="button-post button" type="submit" value="post">
             </form>
         </div>
-        <?php Post::show_posts($conn, $user, $img); ?>
+        <?php Post::show_posts($conn, $user, $img, $user); ?>
     </div>
     </div>
 </body>

@@ -13,9 +13,10 @@ if(!$_GET['post_id']){
 }
 
 $result = Post::delete_Post($conn, $_GET["post_id"]);
-if(!$result){
-    echo "<script>alert('Error');</script>";
+if($_SESSION['admin']==false){
     header('location: profile.php');
+}else{
+    header('location: user.php?username='.$_SESSION['username']);
 }
 
 ?>

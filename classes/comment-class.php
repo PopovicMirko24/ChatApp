@@ -51,7 +51,7 @@ class Comment{
     
     
 
-    public static function show_comments($conn, $post_id){
+    public static function show_comments($conn, $post_id, $user2){
         $comments = array();
         $data = Comment::load_comment_data($conn, $post_id);
         if($data->num_rows > 0){
@@ -86,7 +86,7 @@ class Comment{
                 echo "</a>";
                 echo "<div class=\"comment-content\">";
                 echo "<p class=\"comment-text\">".$conntent."</p>";
-                if($_SESSION['user_id'] === $comment['user_id'])
+                if($_SESSION['user_id'] === $comment['user_id'] || $user2->get_admin())
                     echo "<a onClick=\" javascript:return confirm('Are you sure you want to delete this?'); \" class=\"delete-link\" href=\"delete-comment.php?comment_id=$comment_id\"> delte </a>";
                 echo "</div>";
                 echo "</div>";

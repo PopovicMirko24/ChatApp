@@ -1,3 +1,12 @@
+<?php
+
+require_once 'connectionDB.php';
+
+$user = User::load_user_data($_SESSION['user_id'], $conn);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
    <head>
@@ -8,6 +17,38 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
    </head>
    <body>
+      <?php
+      
+      if($user->get_admin()){
+         echo '
+      
+      <nav>
+         <div class="menu-icon">
+            <span class="fas fa-bars"></span>
+         </div>
+         <div class="logo">
+            Social Media
+         </div>
+         <div class="nav-items">
+            <li><a href="admin-deashboard.php">Deashboard</a></li>
+            <li><a href="logout.php">Logout</a></li>
+         </div>
+         <div class="search-icon">
+            <span class="fas fa-search"></span>
+         </div>
+         <div class="cancel-icon">
+            <span class="fas fa-times"></span>
+         </div>
+         <form >
+            <input name="search-input" type="search" class="search-data" placeholder="Search" required>
+            <button type="submit" class="fas fa-search"></button>
+         </form>
+      </nav>
+      
+      ';
+      }else{
+         echo '
+      
       <nav>
          <div class="menu-icon">
             <span class="fas fa-bars"></span>
@@ -31,7 +72,11 @@
             <button type="submit" class="fas fa-search"></button>
          </form>
       </nav>
-      </div>
+      
+      ';
+      }
+      
+      ?>
       <script>
          const menuBtn = document.querySelector(".menu-icon span");
          const searchBtn = document.querySelector(".search-icon");

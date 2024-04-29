@@ -16,13 +16,13 @@ class Search{
 
     public static function search_users($conn, $username){
         $users = array();
-        $query = 'select * from user where username = ?';
+        $query = 'select username, name, last_name, description, user_id, email, admin, photo_path from user where username = ?';
         $run = $conn->prepare($query);
         $run->bind_param('s', $username);
         $run->execute();
         $results= $run->get_result();
-        if($results->num_rows > 0){
-            $search = $results->fetch_assoc();
+        $search = $results->fetch_assoc();
+        if($results->num_rows > 0 && !$search['admin']){
             $img = "images/comon.webp";
             if($search['photo_path'] != null){
                 $img = $search['photo_path'];

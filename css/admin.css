@@ -7,6 +7,8 @@
 
 body {
     background-color: rgb(7, 7, 7);
+    padding: 0;
+    margin: 0;
 }
 
 .users{
@@ -34,3 +36,46 @@ tr:nth-child(even) {
     background-color: #292f39; 
 }
 
+form{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px 0;
+    background-color: #171c24;
+    border-radius: 20px;
+}
+
+form input[type="text"]{
+    background-color: #181c21;
+    border: none;
+    border-bottom: 1px solid white;
+    font-size: 20px;
+    padding: 5px;
+    margin-right: 10px;
+    color: white;
+}
+
+form input[type="text"]:focus{
+    border: none;
+}
+
+form input[type="submit"]{
+    background-color: transparent !important;
+    color: white;
+    border: 1px solid white;
+    padding: 5px;
+    font-size: 15px;
+    letter-spacing: .5px;
+    transition: .3s;
+}
+
+form input[type="submit"]:hover{
+    background-color: transparent !important;
+    color: lime;
+    border: 1px solid lime;
+    padding: 5px;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+}
