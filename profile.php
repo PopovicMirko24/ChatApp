@@ -53,6 +53,7 @@ if(array_key_exists('delete', $_GET)){
     <title>Profile</title>
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/posts.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="section">
@@ -75,24 +76,29 @@ if(array_key_exists('delete', $_GET)){
                 </ul>
             </div><br>
             <div class="following">
-                <h3>following</h3>
-                <?php Following::show_following($conn, $_SESSION['user_id']); ?>
+                <h3 id="following">following</h3>
+                <div class="f" id="f-slider">
+                    <?php Following::show_following($conn, $_SESSION['user_id']); ?>
+                </div>
             </div>
             <div class="following">
-                <h3>followers</h3>
-                <?php Following::show_followers($conn, $_SESSION['user_id']); ?>
+                <h3 id="followers">followers</h3>
+                <div class="f" id="f-slider2">
+                    <?php Following::show_followers($conn, $_SESSION['user_id']); ?>
+                </div>
             </div>
         </div>
 
-    <div class="common-div post-section">
-        <div class="new-post">
-            <form method="POST">
-                <textarea name="content" id="" cols="30" rows="10" placeholder="text..."></textarea>
-                <input name="button-post" class="button-post button" type="submit" value="post">
-            </form>
+        <div class="common-div post-section">
+            <div class="new-post">
+                <form method="POST">
+                    <textarea name="content" id="" cols="30" rows="10" placeholder="text..."></textarea>
+                    <input name="button-post" class="button-post button" type="submit" value="post">
+                </form>
+            </div>
+            <?php Post::show_posts($conn, $user, $img, $user); ?>
         </div>
-        <?php Post::show_posts($conn, $user, $img, $user); ?>
     </div>
-    </div>
+    <script src="scripts\jquery-slider.js"></script>
 </body>
 </html>

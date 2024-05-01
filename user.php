@@ -53,6 +53,7 @@ if(array_key_exists('follow', $_POST)){
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/posts.css">
     <link rel="stylesheet" href="css/user.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
     <?php require_once 'nav.php'; ?>
@@ -87,12 +88,16 @@ if(array_key_exists('follow', $_POST)){
                 </ul>
             </div><br>
             <div class="following">
-                <h3>following</h3>
-                <?php Following::show_following($conn, $user_->get_id()); ?>
+                <h3 id="following">following</h3>
+                <div class="f" id="f-slider">
+                    <?php Following::show_following($conn, $user_->get_id()); ?>
+                </div>
             </div>
             <div class="following">
-                <h3>followers</h3>
-                <?php Following::show_followers($conn, $user_->get_id()); ?>
+                <h3 id="followers">followers</h3>
+                <div class="f" id="f-slider2">
+                    <?php Following::show_followers($conn, $user_->get_id()); ?>
+                </div>
             </div>
         </div>
 
@@ -113,5 +118,6 @@ if(array_key_exists('follow', $_POST)){
         }
         window.onload = updateFollowButton;
     </script>
+    <script src="scripts\jquery-slider.js"></script>
 </body>
 </html>
