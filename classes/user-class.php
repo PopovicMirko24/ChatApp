@@ -1,5 +1,4 @@
 <?php
-require_once 'connectionDB.php';
 
 class User{
     private $id;

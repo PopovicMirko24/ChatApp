@@ -24,18 +24,19 @@ if(isset($_GET['search'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-    <div class="users">
-        <table>
-            <?php User::show_all_users($conn); ?>
-        </table>
-    </div>
     <form method="GET">
         <input type="text" name="username" id="" placeholder="search...">
         <input type="submit" value="search">
     </form>
+    <div class="users">
+        <table id="table">
+            <?php //User::show_all_users($conn); ?>
+        </table>
+    </div>
+    <script src="scripts/js-scripts/admin-table.js"></script>
 </body>
 </html>

@@ -21,17 +21,20 @@ if(!isset($_SESSION['user_id']) || $_SESSION['user_id'] == null){
 $user =  User::load_user_data($_SESSION['user_id'], $conn);
 $img = $user->get_photo_path();
 
+$_SESSION['user'] = $user;
+$_SESSION['profile-img'] = $img;
+
 if($user->get_admin())
     header('location: admin-deashboard.php');
 
-if(array_key_exists('button-post', $_POST)) { 
+/*if(array_key_exists('button-post', $_POST)) { 
     if($_POST['content'] == null || $_POST['content'] == ""){
         echo "<script> alert('Post is empty'); </script>";
     }else{
         $post = new Post($_SESSION['user_id'], $_POST['content']);
         Post::create_post($conn,$post);
     }
-}
+}*/
 
 if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     $_SESSION['search_username'] = $_GET['search-input'];
@@ -54,6 +57,8 @@ if(array_key_exists('delete', $_GET)){
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/posts.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+    </script>
 </head>
 <body>
     <div class="section">
@@ -91,14 +96,17 @@ if(array_key_exists('delete', $_GET)){
 
         <div class="common-div post-section">
             <div class="new-post">
-                <form method="POST">
-                    <textarea name="content" id="" cols="30" rows="10" placeholder="text..."></textarea>
-                    <input name="button-post" class="button-post button" type="submit" value="post">
-                </form>
+            <form id="form">
+    <textarea name="content" id="content" cols="30" rows="10" placeholder="text..."></textarea>
+    <input id="submit" name="submit" class="button-post button" type="submit" value="post">
+</form>
+
             </div>
-            <?php Post::show_posts($conn, $user, $img, $user); ?>
+            <?php //Post::show_posts($conn, $user, $img, $user); ?>
+            <div class="posts" id="posts"></div>
         </div>
     </div>
-    <script src="scripts\jquery-slider.js"></script>
+    <script src="scripts/js-scripts/jquery-slider.js"></script>
+    <script src="scripts/js-scripts/profile-posts.js"></script>
 </body>
 </html>

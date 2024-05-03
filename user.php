@@ -118,6 +118,6 @@ if(array_key_exists('follow', $_POST)){
         }
         window.onload = updateFollowButton;
     </script>
-    <script src="scripts\jquery-slider.js"></script>
+    <script src="scripts/js-scripts/jquery-slider.js"></script>
 </body>
 </html>

@@ -57,41 +57,44 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
                         $all_posts[] = $post; // Append each post to the $all_posts array
                     }
                 }
-            
-                // Sort the posts by their timestamp in descending order
-                usort($all_posts, function($a, $b) {
-                    return strtotime($b['created_at']) - strtotime($a['created_at']);
-                });
-            
-                // Display the sorted posts
-                foreach($all_posts as $post){
-                    $user = User::load_user_data($post['user_id'], $conn);
-                    $user_img = $user->get_photo_path();
-                    $username = $user->get_username();
-                    // Output HTML for displaying a single post
-                    $post_id = $post['post_id'];
-                    echo "
-            <div class=\"post\">
-                <a href=\"user.php?username=$username\" class=\"link\">
-                <div class=\"user-img\">
-                    <div class=\"post-img-wrapper\" style=\" background-image: url('".$user_img."'); background-size: cover; background-repeat: no-repeat; background-position: center;\">
+                
+                if(count($all_posts)==0 || $posts==null){
+                    echo '<div class="no-post"><p class="no-posts">no posts</p></div>';
+                }else{
+                    usort($all_posts, function($a, $b) {
+                        return strtotime($b['created_at']) - strtotime($a['created_at']);
+                    });
+                
+                    // Display the sorted posts
+                    foreach($all_posts as $post){
+                        $user = User::load_user_data($post['user_id'], $conn);
+                        $user_img = $user->get_photo_path();
+                        $username = $user->get_username();
+                        // Output HTML for displaying a single post
+                        $post_id = $post['post_id'];
+                        echo "
+                <div class=\"post\">
+                    <a href=\"user.php?username=$username\" class=\"link\">
+                    <div class=\"user-img\">
+                        <div class=\"post-img-wrapper\" style=\" background-image: url('".$user_img."'); background-size: cover; background-repeat: no-repeat; background-position: center;\">
+                        </div>
+                        <div class=\"post-name-date\">
+                            <span class=\"username-post link-username\">".$user->get_username()."</span><br>
+                            <span class=\"date\">".$post['created_at']."</span>
+                        </div>
                     </div>
-                    <div class=\"post-name-date\">
-                        <span class=\"username-post link-username\">".$user->get_username()."</span><br>
-                        <span class=\"date\">".$post['created_at']."</span>
+                    </a>
+                    <div class=\"post-content\">
+                        <p class=\"post-text\">".$post['content']."</p>
+                        <form action=\"\" method=\"GET\">
+                            <a class=\"comment-link\" href=\"post.php?post_id=$post_id\"> comment </a>
+                        </form>
                     </div>
                 </div>
-                </a>
-                <div class=\"post-content\">
-                    <p class=\"post-text\">".$post['content']."</p>
-                    <form action=\"\" method=\"GET\">
-                        <a class=\"comment-link\" href=\"post.php?post_id=$post_id\"> comment </a>
-                    </form>
-                </div>
-            </div>
-            ";
+                ";
+                    }
                 }
-            }
+                }
         ?>
     </div>
 </body>
