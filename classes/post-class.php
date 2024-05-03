@@ -114,7 +114,7 @@ class Post{
                 echo "<form action=\"\" method=\"GET\">";
                 echo "<a class=\"comment-link\" href=\"post.php?post_id=$post_id\"> comment </a>";
                 if($user->get_id() == $_SESSION['user_id'] || $admin == true) {
-                    echo "<a onClick=\" javascript:return confirm('Are you sure you want to delete this?'); \" class=\"delete-link\" href=\"delete-post.php?post_id=$post_id\"> delte </a>";
+                    echo "<a id=\"delete\" onclick=\"deletePost($post_id)\" \" class=\"delete-link\"> delte </a>";
                 }
                 echo "</form>";
                 echo "</form>";

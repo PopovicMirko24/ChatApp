@@ -29,3 +29,17 @@ $(document).ready(function(){
         });
     });
 });
+
+function deletePost(post_id) {
+    event.preventDefault(); // Prevents the default action of the link
+    const url = "delete-post.php?post_id="+post_id; // Retrieves the URL from the clicked link
+    if (confirm('Are you sure you want to delete this post?')) {
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(response) {
+                posts();
+            }
+        });
+    }
+}
