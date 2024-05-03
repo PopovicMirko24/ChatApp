@@ -12,6 +12,6 @@ if(!$conn){
 }
 
 $user = User::load_user_data($_SESSION['user_id'], $conn);
-Post::show_posts($conn, $user, $user->get_photo_path(), false);
+Post::show_posts($conn, $user, $user->get_photo_path(), $_SESSION['admin']);
 
 ?>

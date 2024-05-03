@@ -99,7 +99,7 @@ class Post{
 
             for($i = count($posts) - 1; $i >= 0; $i--){
                 $post = $posts[$i];
-                $post_id = $post['post_id'] ."</br>";
+                $post_id = $post['post_id'];
                 echo "<div class=\"post\">";
                 echo "<div class=\"user-img\">";
                 echo "<div class=\"post-img-wrapper\" style=\" background-image: url('$img'); background-size: cover; background-repeat: no-repeat; background-position: center;\">";

@@ -102,7 +102,7 @@ if(array_key_exists('follow', $_POST)){
         </div>
 
     <div class="common-div post-section">
-        <?php Post::show_posts($conn, $user_, $img, $user); ?>
+        <?php Post::show_posts($conn, $user_, $img, $_SESSION['admin']); ?>
     </div>
     </div>
     <script>
