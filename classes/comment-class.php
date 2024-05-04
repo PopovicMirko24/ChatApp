@@ -1,6 +1,5 @@
 <?php
 
-require_once 'connectionDB.php';
 
 class Comment{
     private $post_id;
@@ -29,7 +28,7 @@ class Comment{
     }
 
     public static function create_comment($conn, $comment){
-        $post_id = $comment->post_id;
+        $post_id = $comment->get_post_id();
         $content = $comment->get_conntent();
         $user_id = $comment->get_user_id();
 
@@ -37,7 +36,7 @@ class Comment{
         $run = $conn->prepare($sql);
         $run->bind_param('iis', $post_id, $user_id, $content);
         $run->execute();
-        Comment::load_comment_data($conn, $post_id);
+        return $post_id." ".$content." ".$user_id;
     }
 
     private static function load_comment_data($conn, $post_id){
@@ -51,7 +50,7 @@ class Comment{
     
     
 
-    public static function show_comments($conn, $post_id, $user2){
+    public static function show_comments($conn, $post_id, $admin){
         $comments = array();
         $data = Comment::load_comment_data($conn, $post_id);
         if($data->num_rows > 0){
@@ -86,8 +85,8 @@ class Comment{
                 echo "</a>";
                 echo "<div class=\"comment-content\">";
                 echo "<p class=\"comment-text\">".$conntent."</p>";
-                if($_SESSION['user_id'] === $comment['user_id'] || $user2->get_admin())
-                    echo "<a onClick=\" javascript:return confirm('Are you sure you want to delete this?'); \" class=\"delete-link\" href=\"delete-comment.php?comment_id=$comment_id\"> delte </a>";
+                if($_SESSION['user_id'] === $comment['user_id'] || $admin == true)
+                    echo "<a class=\"delete-link\" onclick=\"deleteComment(".$comment_id.",".$post_id.")\"> delte </a>";
                 echo "</div>";
                 echo "</div>";
             }

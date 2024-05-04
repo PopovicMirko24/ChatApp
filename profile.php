@@ -57,8 +57,6 @@ if(array_key_exists('delete', $_GET)){
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/posts.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script>
-    </script>
 </head>
 <body>
     <div class="section">
@@ -107,6 +105,6 @@ if(array_key_exists('delete', $_GET)){
         </div>
     </div>
     <script src="scripts/js-scripts/jquery-slider.js"></script>
-    <script src="scripts/js-scripts/profile-posts.js"></script>
+    <script src="scripts/js-scripts/ajaxPostsProfile.js"></script>
 </body>
 </html>
