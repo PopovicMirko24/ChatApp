@@ -65,7 +65,7 @@ class Comment{
                 $username = $comment['username'];
                 $date = $comment['created_at'];
                 $conntent = $comment['conntent'];
-                $img = 'images/common.webp';
+                $img = 'images/comon.webp';
                 if($comment['photo_path']){
                     $img = $comment['photo_path'];
                 }
@@ -78,6 +78,7 @@ class Comment{
                 echo "<div class=\"info-text\">";
                 echo "<span class=\"username-comment link-username\">".$username."</span><br>";
                 echo "<span class=\"date-comment\">".$date."</span>";
+                echo "</div>";
                 echo "</div>";
                 echo "</div>";
                 echo "</a>";
