@@ -16,6 +16,10 @@ body {
     margin-left: 50px;
 }
 
+.section{
+    padding-top: 50px;
+}
+
 .user {
     padding: 10px;
     width: 100%;

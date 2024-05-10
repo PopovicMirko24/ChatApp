@@ -24,11 +24,7 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     header('location: search-users.php');
 }
 
-
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,11 +35,18 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/posts.css">
-
 </head>
 <body>
     <?php require_once 'nav.php'; ?>
-    <div class="section" style="padding-top: 100px;">
+    <div class="following-s section">
+        <div class="following">
+            <h3>following</h3>
+            <div class="f">
+                <?php Following::show_following($conn, $_SESSION['user_id']); ?>
+            </div>
+        </div>
+    </div>
+    <div class="section posts" style="padding-top: 100px;">
         <?php
             if(Following::get_all_followings($conn, $user->get_id())){
                 $followings = Following::get_all_followings($conn, $user->get_id());

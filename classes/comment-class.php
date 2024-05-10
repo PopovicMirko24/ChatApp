@@ -74,9 +74,7 @@ class Comment{
                 echo "<div class=\"comment\">";
                 echo "<a href=\"user.php?username=$username\" class=\"link\">";
                 echo "<div class=\"info-comment\">";
-                echo "<div class=\"img-wrapper\">";
-                echo "<img src=\"$img\" class=\"profile-img-conntent\">";
-                echo "</div>";
+                echo "<div class=\"img-wrapper-com\" style=\" background-image: url('$img'); background-size: cover; background-repeat: no-repeat; background-position: center;\">";
                 echo "<div class=\"info-text\">";
                 echo "<span class=\"username-comment link-username\">".$username."</span><br>";
                 echo "<span class=\"date-comment\">".$date."</span>";

@@ -27,15 +27,6 @@ $_SESSION['profile-img'] = $img;
 if($user->get_admin())
     header('location: admin-deashboard.php');
 
-/*if(array_key_exists('button-post', $_POST)) { 
-    if($_POST['content'] == null || $_POST['content'] == ""){
-        echo "<script> alert('Post is empty'); </script>";
-    }else{
-        $post = new Post($_SESSION['user_id'], $_POST['content']);
-        Post::create_post($conn,$post);
-    }
-}*/
-
 if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     $_SESSION['search_username'] = $_GET['search-input'];
     header('location: search-users.php');
@@ -91,7 +82,6 @@ if(array_key_exists('delete', $_GET)){
                 </div>
             </div>
         </div>
-
         <div class="common-div post-section">
             <div class="new-post">
             <form id="form">

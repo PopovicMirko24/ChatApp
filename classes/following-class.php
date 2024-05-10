@@ -57,17 +57,22 @@ class Following{
     public static function show_following($conn, $user_id){
         $followings = array();
         $followings = Following::get_all_followings($conn, $user_id);
-        foreach($followings as $following){
-            $user = User::load_user_data($following,$conn);
-            $username = $user->get_username();
-            $img = $user->get_photo_path();
-            echo '
-            <a href="user.php?username=' . $username . '" class="link">
-            <div class="users">
-            <div class="img-wrapper-following" style=" background-image: url(\''.$img.'\'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
-                <div class="following-username"><p class="following-username link-username">'.$username.'</p></div>       
-            </div></a>
-            ';
+
+        if($followings == null){
+            echo 'no followers';
+        }else{
+            foreach($followings as $following){
+                $user = User::load_user_data($following,$conn);
+                $username = $user->get_username();
+                $img = $user->get_photo_path();
+                echo '
+                <a href="user.php?username=' . $username . '" class="link">
+                <div class="users">
+                <div class="img-wrapper-following" style=" background-image: url(\''.$img.'\'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="following-username"><p class="following-username link-username">'.$username.'</p></div>       
+                </div></a>
+                ';
+            }
         }
     }
 
