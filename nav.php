@@ -1,6 +1,6 @@
 <?php
 
-require_once 'connectionDB.php';
+require_once 'scripts/php-scripts/connectionDB.php';
 
 $user = User::load_user_data($_SESSION['user_id'], $conn);
 
@@ -59,7 +59,7 @@ $user = User::load_user_data($_SESSION['user_id'], $conn);
          <div class="nav-items">
             <li><a href="home.php">Home</a></li>
             <li><a href="profile.php">Profile</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="scripts/php-scripts/logout.php">Logout</a></li>
          </div>
          <div class="search-icon">
             <span class="fas fa-search"></span>

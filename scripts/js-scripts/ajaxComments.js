@@ -31,7 +31,7 @@ function createComment(post_id) {
 
 function deleteComment(comment_id, post_id) {
     event.preventDefault(); // Prevents the default action of the link
-    const url = "delete-comment.php?comment_id="+comment_id; // Retrieves the URL from the clicked link
+    const url = "scripts/php-scripts/delete-comment.php?comment_id="+comment_id; // Retrieves the URL from the clicked link
     if (confirm('Are you sure you want to delete this comment?')) {
         $.ajax({
             type: 'GET',

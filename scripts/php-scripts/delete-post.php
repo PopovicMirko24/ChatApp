@@ -1,7 +1,7 @@
 <?php
 
 require_once 'connectionDB.php';
-require_once 'classes/post-class.php';
+require_once '../../classes/post-class.php';
 
 if(!$conn){
     die("Neuspesna konekcija sa bazom");  

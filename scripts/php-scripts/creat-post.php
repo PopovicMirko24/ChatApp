@@ -1,6 +1,6 @@
 <?php
 
-include '../../connectionDB.php';
+include 'connectionDB.php';
 include '../../classes/post-class.php';
 
 if(isset($_POST)) { 

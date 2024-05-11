@@ -1,7 +1,7 @@
 <?php
 
 require_once 'connectionDB.php';
-require_once 'classes/comment-class.php';
+require_once '../../classes/comment-class.php';
 
 if(!$conn){
     die("Neuspesna konekcija sa bazom");  

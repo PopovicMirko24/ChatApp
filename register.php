@@ -1,5 +1,5 @@
 <?php
-require_once 'connectionDB.php';
+require_once 'scripts/php-scripts/connectionDB.php';
     $error_text = "";
 
     if(!$conn){

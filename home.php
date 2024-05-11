@@ -1,6 +1,6 @@
 <?php
 
-require_once 'connectionDB.php';
+require_once 'scripts/php-scripts/connectionDB.php';
 require_once 'classes/user-class.php';
 require_once 'classes/post-class.php';
 require_once 'classes/search-class.php';
@@ -61,7 +61,7 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
                     }
                 }
                 
-                if(count($all_posts)==0 || $posts==null){
+                if($all_posts==null){
                     echo '<div class="no-post"><p class="no-posts">no posts</p></div>';
                 }else{
                     usort($all_posts, function($a, $b) {

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'connectionDB.php';
+require_once 'scripts/php-scripts/connectionDB.php';
 require_once 'classes/user-class.php';
 require_once 'classes/post-class.php';
 require_once 'classes/search-class.php';
@@ -81,13 +81,7 @@ if(array_key_exists('cancle', $_POST)){
                     <input type="text" name="lastname" id="" value="<?php echo $user->get_lastname() ?>">
                 </div>
                 <div class="cl2">
-                    <textarea name="description" id="" cols="30" rows="5" value="
-                        <?php 
-                        if($des){
-                            echo $des;
-                        }
-                        ?>
-                    " placeholder="description"></textarea>
+                    <textarea name="description" id="" cols="30" rows="5" value="<?php echo $des; ?>" placeholder="description"></textarea>
                 </div>
             </div>
             <br>

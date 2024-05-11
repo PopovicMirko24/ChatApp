@@ -1,12 +1,15 @@
 <?php
 
-require_once 'connectionDB.php';
+require_once 'scripts/php-scripts/connectionDB.php';
 $error_text = "";
 if(!$conn){
     die("Neuspesna konekcija sa bazom");  
 }
 
 $_SESSION['admin'] = false;
+
+if($_SESSION['user_id']!=null)
+    $_SESSION['user_id'] = null;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $username = $_POST['username'];
