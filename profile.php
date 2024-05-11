@@ -55,7 +55,7 @@ if(array_key_exists('delete', $_GET)){
             <div class="user">
                 <ul class="user-info">
                     <li>
-                        <div class="img-wrapper" style=" background-image: url(' <?php echo $user->get_photo_path() ?> '); background-size: cover; background-repeat: no-repeat; background-position: center;"></div><br>
+                        <div class="img-wrapper" style="background-image: url('<?php echo $user->get_photo_path() ?>'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div><br>
                         <h3><?php echo $user->get_username() ?></h3>
                     </li>
                     <li>
@@ -84,13 +84,14 @@ if(array_key_exists('delete', $_GET)){
         </div>
         <div class="common-div post-section">
             <div class="new-post">
-            <form id="form">
-                <textarea name="content" id="content" cols="30" rows="10" placeholder="text..."></textarea>
-                <input id="submit" name="submit" class="button-post button" type="submit" value="post">
-            </form>
+                <form id="form">
+                    <textarea name="content" id="content" cols="30" rows="10" placeholder="text..."></textarea>
+                    <input id="submit" name="submit" class="button-post button" type="submit" value="post">
+                </form>
+            </div>
+            <div class="posts" id="posts"></div>
         </div>
     </div>
-    <div class="posts" id="posts"></div>
     <script src="scripts/js-scripts/jquery-slider.js"></script>
     <script src="scripts/js-scripts/ajaxPostsProfile.js"></script>
 </body>

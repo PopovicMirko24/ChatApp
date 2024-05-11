@@ -8,7 +8,7 @@ if(!$conn){
 
 $_SESSION['admin'] = false;
 
-if($_SESSION['user_id']!=null)
+if(isset($_SESSION['user_id']))
     $_SESSION['user_id'] = null;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
