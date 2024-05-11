@@ -85,15 +85,12 @@ if(array_key_exists('delete', $_GET)){
         <div class="common-div post-section">
             <div class="new-post">
             <form id="form">
-    <textarea name="content" id="content" cols="30" rows="10" placeholder="text..."></textarea>
-    <input id="submit" name="submit" class="button-post button" type="submit" value="post">
-</form>
-
-            </div>
-            <?php //Post::show_posts($conn, $user, $img, $user); ?>
-            <div class="posts" id="posts"></div>
+                <textarea name="content" id="content" cols="30" rows="10" placeholder="text..."></textarea>
+                <input id="submit" name="submit" class="button-post button" type="submit" value="post">
+            </form>
         </div>
     </div>
+    <div class="posts" id="posts"></div>
     <script src="scripts/js-scripts/jquery-slider.js"></script>
     <script src="scripts/js-scripts/ajaxPostsProfile.js"></script>
 </body>

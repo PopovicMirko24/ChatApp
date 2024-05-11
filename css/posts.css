@@ -24,6 +24,11 @@
 
 .username-post{
     font-size: 17px;
+    margin-left: 5px;
+}
+
+.date{
+    margin-left: 5px;
 }
 
 .post-name-date:hover .username-post{
@@ -106,4 +111,11 @@
     padding-bottom: 50px;
     border-radius: 20px;
     background-color: #171c24;
+}
+
+@media (max-width: 1200px){
+    .post-img-wrapper{
+        width: 40px;
+        height: 40px;
+    }
 }

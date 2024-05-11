@@ -31,7 +31,7 @@ $user = User::load_user_data($_SESSION['user_id'], $conn);
          </div>
          <div class="nav-items">
             <li><a href="admin-deashboard.php">Deashboard</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="scripts/php-scripts/logout.php">Logout</a></li>
          </div>
          <div class="search-icon">
             <span class="fas fa-search"></span>

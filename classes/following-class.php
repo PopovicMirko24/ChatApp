@@ -59,7 +59,7 @@ class Following{
         $followings = Following::get_all_followings($conn, $user_id);
 
         if($followings == null){
-            echo 'no followers';
+            echo '<center>no followers</center>';
         }else{
             foreach($followings as $following){
                 $user = User::load_user_data($following,$conn);
@@ -80,7 +80,7 @@ class Following{
         $followings = array();
         $followings = Following::get_all_followers($conn, $user_id);
         if($followings == null){
-            echo 'no followers';
+            echo '<center>no followers</center>';
         }else{
             foreach($followings as $following){
                 $user = User::load_user_data($following,$conn);

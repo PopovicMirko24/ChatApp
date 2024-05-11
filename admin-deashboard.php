@@ -27,15 +27,12 @@ if(isset($_GET['search'])){
     <title>Admin</title>
     <link rel="stylesheet" href="css/admin.css">
 </head>
+<?php require_once 'nav.php'; ?>
 <body>
-    <form method="GET">
-        <input type="text" name="username" id="" placeholder="search...">
-        <input type="submit" value="search">
-    </form>
+    <div class="section">
     <div class="users">
-        <table id="table">
-            <?php //User::show_all_users($conn); ?>
-        </table>
+        <table id="table"></table>
+    </div>
     </div>
     <script src="scripts/js-scripts/admin-table.js"></script>
 </body>
