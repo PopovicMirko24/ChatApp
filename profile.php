@@ -7,11 +7,11 @@ require_once 'classes/search-class.php';
 require_once 'classes/following-class.php';
 require_once 'nav.php';
 
-if(!$conn){
-    die("Neuspesna konekcija sa bazom");  
+if (!$conn) {
+    die("Neuspesna konekcija sa bazom");
 }
 
-if(!isset($_SESSION['user_id']) || $_SESSION['user_id'] == null){
+if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] == null) {
     header('location: login.php');
     exit();
 }
@@ -24,15 +24,15 @@ $img = $user->get_photo_path();
 $_SESSION['user'] = $user;
 $_SESSION['profile-img'] = $img;
 
-if($user->get_admin())
+if ($user->get_admin())
     header('location: admin-deashboard.php');
 
-if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
+if (array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     $_SESSION['search_username'] = $_GET['search-input'];
     header('location: search-users.php');
 }
 
-if(array_key_exists('delete', $_GET)){
+if (array_key_exists('delete', $_GET)) {
     Post::delete_Post($conn, $_GET['deleteHidden']);
 }
 
@@ -41,6 +41,7 @@ if(array_key_exists('delete', $_GET)){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,6 +50,7 @@ if(array_key_exists('delete', $_GET)){
     <link rel="stylesheet" href="css/posts.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
+
 <body>
     <div class="section">
         <div class="common-div">
@@ -59,7 +61,7 @@ if(array_key_exists('delete', $_GET)){
                         <h3><?php echo $user->get_username() ?></h3>
                     </li>
                     <li>
-                        <?php echo $user->get_name() ." " .$user->get_lastname() ?><br>
+                        <?php echo $user->get_name() . " " . $user->get_lastname() ?><br>
                     </li>
                     <li>
                         <p class="description"><?php echo $user->get_description() ?></p>
@@ -95,4 +97,5 @@ if(array_key_exists('delete', $_GET)){
     <script src="scripts/js-scripts/jquery-slider.js"></script>
     <script src="scripts/js-scripts/ajaxPostsProfile.js"></script>
 </body>
+
 </html>

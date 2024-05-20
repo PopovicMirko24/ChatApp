@@ -3,16 +3,16 @@
 require_once 'scripts/php-scripts/connectionDB.php';
 require_once 'classes/user-class.php';
 
-if(!$conn){
-    die("Neuspesna konekcija sa bazom");  
-} 
+if (!$conn) {
+    die("Neuspesna konekcija sa bazom");
+}
 
-if(!isset($_SESSION['user_id'])){
+if (!isset($_SESSION['user_id'])) {
     header('location: login.php');
     exit();
 }
 
-if(isset($_GET['search'])){
+if (isset($_GET['search'])) {
     $search = $_GET['search'];
     $user = $search_class->searchUsers($search);
 }
@@ -21,6 +21,7 @@ if(isset($_GET['search'])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,12 +29,14 @@ if(isset($_GET['search'])){
     <link rel="stylesheet" href="css/admin.css">
 </head>
 <?php require_once 'nav.php'; ?>
+
 <body>
     <div class="section">
-    <div class="users">
-        <table id="table"></table>
-    </div>
+        <div class="users">
+            <table id="table"></table>
+        </div>
     </div>
     <script src="scripts/js-scripts/admin-table.js"></script>
 </body>
+
 </html>

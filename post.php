@@ -6,16 +6,16 @@ require_once 'classes/post-class.php';
 require_once 'classes/search-class.php';
 require_once 'classes/comment-class.php';
 
-if(!$conn){
-    die("Neuspesna konekcija sa bazom");  
+if (!$conn) {
+    die("Neuspesna konekcija sa bazom");
 }
 
-if(!isset($_SESSION['user_id'])){
+if (!isset($_SESSION['user_id'])) {
     header('location: login.php');
     exit();
 }
 
-if(!isset($_GET['post_id'])){
+if (!isset($_GET['post_id'])) {
     echo 'greska';
 }
 
@@ -35,15 +35,16 @@ $posts_user_id = $post->get_post_id();
     Comment::create_comment($conn, $comment);
 }*/
 
-if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
+if (array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     $_SESSION['search_username'] = $_GET['search-input'];
     header('location: search-users.php');
-} 
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,12 +53,13 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     <link rel="stylesheet" href="css/comments.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
+
 <body>
     <?php require_once 'nav.php'; ?>
     <section>
         <div class="post">
             <div class="info">
-                <?php echo "<div class=\"img-wrapper\" style=\" background-image: url('$posts_user_img'); background-size: cover; background-repeat: no-repeat; background-position: center;\"></div>"?>
+                <?php echo "<div class=\"img-wrapper\" style=\" background-image: url('$posts_user_img'); background-size: cover; background-repeat: no-repeat; background-position: center;\"></div>" ?>
                 <div class="text-wrapper">
                     <span class="username"><?php echo $posts_user->get_username(); ?></span><br>
                     <span class="date"><?php echo $post->get_date(); ?></span>
@@ -69,29 +71,31 @@ if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
         </div>
         <div class="comments post">
             <?php
-            
-            if(!$user->get_admin()){
+
+            if (!$user->get_admin()) {
                 echo '
             <div class="new-comment">
                 <form id="form" method="POST">
                     <textarea name="comment-conntent" id="content" cols="30" rows="10" placeholder="text..."></textarea>
                     <input id="comment-btn" name="new-comment" class="button-post" type="submit" value="post" >
-                    <input id="post_id_hidden" type="hidden" name="post_id", value="'.$_GET["post_id"].'">
+                    <input id="post_id_hidden" type="hidden" name="post_id", value="' . $_GET["post_id"] . '">
                 </form>
             </div>
             ';
             }
-            
+
             ?>
-            <?php //Comment::show_comments($conn, $_GET['post_id'], $user); ?>
+            <?php //Comment::show_comments($conn, $_GET['post_id'], $user); 
+            ?>
             <div id="comm"></div>
         </div>
     </section>
     <script src="scripts/js-scripts/ajaxComments.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            comments(<?php echo $_GET['post_id'] ?>);    
+            comments(<?php echo $_GET['post_id'] ?>);
         });
     </script>
 </body>
+
 </html>

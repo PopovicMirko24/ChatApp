@@ -6,46 +6,47 @@ require_once 'classes/post-class.php';
 require_once 'classes/search-class.php';
 require_once 'classes/following-class.php';
 
-if(array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
+if (array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
     $_SESSION['search_username'] = $_GET['search-input'];
     header('location: search-users.php');
 }
 
 $user_nav = User::load_user_data($_SESSION['user_id'], $conn);
 
-if(isset($_GET['username'])) {
-    if($_GET['username'] != $user_nav->get_username()){
+if (isset($_GET['username'])) {
+    if ($_GET['username'] != $user_nav->get_username()) {
         $username = $_GET['username'];
         $username = str_replace("'", "", $username);
         $user_ = User::load_user_data_by_username($username, $conn);
         $img = $user_->get_photo_path();
-    }else{
+    } else {
         header('location: profile.php');
     }
 }
 
 $_SESSION['username'] = $_GET['username'];
 
-if(array_key_exists('comment', $_GET)) {
+if (array_key_exists('comment', $_GET)) {
     $_SESSION['post_id'] = $_GET['post_id'];
     header('location: post.php');
 }
 
 $following = Following::Is_following($conn, $_SESSION['user_id'], $user_->get_id());
 
-if(array_key_exists('follow', $_POST)){
-    if($following)
+if (array_key_exists('follow', $_POST)) {
+    if ($following)
         Following::unfollow($conn, $_SESSION['user_id'], $user_->get_id());
     else
         Following::follow($conn, $_SESSION['user_id'], $user_->get_id());
 
-    header('location: user.php?username='. $user_->get_username());
+    header('location: user.php?username=' . $user_->get_username());
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +56,7 @@ if(array_key_exists('follow', $_POST)){
     <link rel="stylesheet" href="css/user.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
+
 <body>
     <?php require_once 'nav.php'; ?>
     <div class="section">
@@ -66,15 +68,15 @@ if(array_key_exists('follow', $_POST)){
                         <h3><?php echo $user_->get_username() ?></h3>
                     </li>
                     <li>
-                        <?php echo $user_->get_name() ." " .$user_->get_lastname() ?><br>
+                        <?php echo $user_->get_name() . " " . $user_->get_lastname() ?><br>
                     </li>
                     <li>
                         <p class="description"><?php echo $user_->get_description() ?></p>
                     </li>
                     <li class="li-edit">
-                    <?php
-                    if($_SESSION['user_id'] != $user_->get_id())
-                        echo '
+                        <?php
+                        if ($_SESSION['user_id'] != $user_->get_id())
+                            echo '
 
                         <div class="follow">
                             <form action="" method="POST">
@@ -83,7 +85,7 @@ if(array_key_exists('follow', $_POST)){
                         </div>
 
                         ';
-                ?>
+                        ?>
                     </li>
                 </ul>
             </div><br>
@@ -101,23 +103,24 @@ if(array_key_exists('follow', $_POST)){
             </div>
         </div>
 
-    <div class="common-div post-section">
-        <?php Post::show_posts($conn, $user_, $img, $_SESSION['admin']); ?>
-    </div>
+        <div class="common-div post-section">
+            <?php Post::show_posts($conn, $user_, $img, $_SESSION['admin']); ?>
+        </div>
     </div>
     <script>
         function updateFollowButton() {
             const btn = document.getElementById("btn-follow");
             <?php
-                if($following) {
-                    echo 'btn.value = "following";';
-                } else {
-                    echo 'btn.value = "follow";';
-                }
+            if ($following) {
+                echo 'btn.value = "following";';
+            } else {
+                echo 'btn.value = "follow";';
+            }
             ?>
         }
         window.onload = updateFollowButton;
     </script>
     <script src="scripts/js-scripts/jquery-slider.js"></script>
 </body>
+
 </html>

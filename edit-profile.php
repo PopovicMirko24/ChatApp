@@ -5,11 +5,11 @@ require_once 'classes/user-class.php';
 require_once 'classes/post-class.php';
 require_once 'classes/search-class.php';
 
-if(!$conn){
-    die("Neuspesna konekcija sa bazom");  
+if (!$conn) {
+    die("Neuspesna konekcija sa bazom");
 }
 
-if(!isset($_SESSION['user_id'])){
+if (!isset($_SESSION['user_id'])) {
     header('location: login.php');
     exit();
 }
@@ -19,30 +19,30 @@ $img = $user->get_photo_path();
 $des = $user->get_description();
 
 
-$upload_dir = 'images/' .$user->get_username();
+$upload_dir = 'images/' . $user->get_username();
 $new_img_path = $img;
 $description = null;
 
-if(array_key_exists('cancle', $_POST)){
+if (array_key_exists('cancle', $_POST)) {
     header('location: profile.php');
-}else if ($_SERVER["REQUEST_METHOD"] == "POST" && array_key_exists('save', $_POST)) {
-    if($_POST['description'] != null || $_POST['description'] != ""){
+} else if ($_SERVER["REQUEST_METHOD"] == "POST" && array_key_exists('save', $_POST)) {
+    if ($_POST['description'] != null || $_POST['description'] != "") {
         $description = $_POST['description'];
     }
     $name = $_POST['name'];
     $lastname = $_POST['lastname'];
-    if(isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-        $time = date("d-m-Y")."-". time() ;
+    if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+        $time = date("d-m-Y") . "-" . time();
         $file_tmp = $_FILES['file']['tmp_name'];
-        $file_name = $time."-".basename($_FILES['file']['name']);
-        
+        $file_name = $time . "-" . basename($_FILES['file']['name']);
+
         // Kreiranje direktorijuma ako ne postoji
         if (!file_exists($upload_dir)) {
             mkdir($upload_dir, 0777, true);
         }
         $upload_path = $upload_dir . '/' . $file_name;
         // Premestanje slike u odredišni direktorijum
-        if(move_uploaded_file($file_tmp, $upload_path)) {
+        if (move_uploaded_file($file_tmp, $upload_path)) {
             // Novi put do slike
             $new_img_path = $upload_path;
             // Ažuriranje puta do slike u bazi podataka ili gde vam je potrebno
@@ -53,7 +53,7 @@ if(array_key_exists('cancle', $_POST)){
             echo "Greška prilikom otpremanja slike.";
         }
     }
-    User::save_changes($conn, $name, $lastname, $description, $img,$_SESSION['user_id']);
+    User::save_changes($conn, $name, $lastname, $description, $img, $_SESSION['user_id']);
     header('location: profile.php');
 }
 
@@ -61,12 +61,14 @@ if(array_key_exists('cancle', $_POST)){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
     <link rel="stylesheet" href="css/edit.css">
 </head>
+
 <body>
     <div class="container">
         <form action="" method="POST" enctype="multipart/form-data">
@@ -79,7 +81,11 @@ if(array_key_exists('cancle', $_POST)){
                     <input class="input-name" type="text" name="username" id="" value="<?php echo $user->get_username() ?>" disabled><br>
                     <input type="text" name="name" id="" value="<?php echo $user->get_name() ?>" placeholder="name"><br>
                     <input type="text" name="lastname" id="" value="<?php echo $user->get_lastname() ?>" placeholder="lastname"><br>
-                    <input class="input-description" type="text" name="description" id="" value="<?php if($user->get_description() == 'no description'){echo null;}else{echo $user->get_description();} ?>" placeholder="description...">
+                    <input class="input-description" type="text" name="description" id="" value="<?php if ($user->get_description() == 'no description') {
+                                                                                                        echo null;
+                                                                                                    } else {
+                                                                                                        echo $user->get_description();
+                                                                                                    } ?>" placeholder="description...">
 
                 </div>
             </div>
@@ -91,25 +97,25 @@ if(array_key_exists('cancle', $_POST)){
         </form>
     </div>
     <script>
-        function ucitajFile(){
+        function ucitajFile() {
             var file1 = document.getElementById("file");
-            if(file1.files.length != 0 && file1.files[0].type.match(/image.*/)){
+            if (file1.files.length != 0 && file1.files[0].type.match(/image.*/)) {
                 var fajl = file1.files[0];
                 var reader = new FileReader();
                 reader.readAsDataURL(fajl);
-                reader.onload = function (e){
+                reader.onload = function(e) {
                     var img = document.getElementById("img");
-                    img.style.backgroundImage = "url("+e.target.result+")";    
+                    img.style.backgroundImage = "url(" + e.target.result + ")";
                 };
 
-                reader.error = function (){
+                reader.error = function() {
                     alert("Greska pr ciranju fajla");
                 };
-            }
-            else{
+            } else {
                 alert("Greska pri citanju fajla 1")
             }
         }
     </script>
 </body>
+
 </html>

@@ -1,28 +1,32 @@
-<?php 
+<?php
 
-class Search{
+class Search
+{
 
     private $username;
 
-    public function __construct($username){
+    public function __construct($username)
+    {
         $this->username = $username;
     }
 
-    public function get_username(){
+    public function get_username()
+    {
         return $this->username;
     }
 
-    public static function search_users($conn, $username){
+    public static function search_users($conn, $username)
+    {
         $users = array();
         $query = 'select username, name, last_name, description, user_id, email, admin, photo_path from user where username = ?';
         $run = $conn->prepare($query);
         $run->bind_param('s', $username);
         $run->execute();
-        $results= $run->get_result();
+        $results = $run->get_result();
         $search = $results->fetch_assoc();
-        if($results->num_rows > 0 && !$search['admin']){
+        if ($results->num_rows > 0 && !$search['admin']) {
             $img = "images/comon.webp";
-            if($search['photo_path'] != null){
+            if ($search['photo_path'] != null) {
                 $img = $search['photo_path'];
             }
             $username = $search['username'];
@@ -37,7 +41,7 @@ class Search{
                 </div>
             </a>
             ";
-        }else{
+        } else {
             echo "
             
             <div class=\"profile\">
@@ -48,5 +52,3 @@ class Search{
         }
     }
 }
-
-?>

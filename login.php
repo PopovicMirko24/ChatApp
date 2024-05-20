@@ -2,37 +2,37 @@
 
 require_once 'scripts/php-scripts/connectionDB.php';
 $error_text = "";
-if(!$conn){
-    die("Neuspesna konekcija sa bazom");  
+if (!$conn) {
+    die("Neuspesna konekcija sa bazom");
 }
 
 $_SESSION['admin'] = false;
 
-if(isset($_SESSION['user_id']))
+if (isset($_SESSION['user_id']))
     $_SESSION['user_id'] = null;
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
 
     $sql_username = 'select user_id, password, admin from user where username = ?';
-    $run = $conn -> prepare($sql_username);
-    $run -> bind_param('s', $username);
-    $run -> execute();
-    $results = $run -> get_result();
-    if($results -> num_rows == 1){
-        $user = $results -> fetch_assoc();
-        if(password_verify($_POST['password'], $user['password'])){
+    $run = $conn->prepare($sql_username);
+    $run->bind_param('s', $username);
+    $run->execute();
+    $results = $run->get_result();
+    if ($results->num_rows == 1) {
+        $user = $results->fetch_assoc();
+        if (password_verify($_POST['password'], $user['password'])) {
             $_SESSION['user_id'] = $user['user_id'];
-            if(!$user['admin'])
+            if (!$user['admin'])
                 header('location: profile.php');
-            else{
+            else {
                 $_SESSION['admin'] = true;
                 header('location: admin-deashboard.php');
             }
-        }else{
+        } else {
             $error_text = 'wrong password';
         }
-    }else{
+    } else {
         $error_text = "username does not exist";
     }
 }
@@ -40,6 +40,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,6 +49,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/login.css">
 </head>
+
 <body>
     <div class="container">
         <div class="row justify-content-center">
@@ -73,4 +75,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <!-- Bootstrap JS (Optional) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
