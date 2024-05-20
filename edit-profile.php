@@ -71,17 +71,16 @@ if(array_key_exists('cancle', $_POST)){
     <div class="container">
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="img-wrapper">
-                <img id="img" src="<?php echo $img; ?>" alt=""><br>
+                <div class="img" id="img" style=" background-image: url('<?php echo $img; ?>'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                 <input type="file" name="file" id="file" onchange="ucitajFile()">
-            </div>
+            </div><br>
             <div class="column">
                 <div class="cl1">
-                    <input type="text" name="username" id="" value="<?php echo $user->get_username() ?>" disabled><br>
-                    <input type="text" name="name" id="" value="<?php echo $user->get_name() ?>"><br>
-                    <input type="text" name="lastname" id="" value="<?php echo $user->get_lastname() ?>">
-                </div>
-                <div class="cl2">
-                    <textarea name="description" id="" cols="30" rows="5" value="<?php echo $des; ?>" placeholder="description"></textarea>
+                    <input class="input-name" type="text" name="username" id="" value="<?php echo $user->get_username() ?>" disabled><br>
+                    <input type="text" name="name" id="" value="<?php echo $user->get_name() ?>" placeholder="name"><br>
+                    <input type="text" name="lastname" id="" value="<?php echo $user->get_lastname() ?>" placeholder="lastname"><br>
+                    <input class="input-description" type="text" name="description" id="" value="<?php if($user->get_description() == 'no description'){echo null;}else{echo $user->get_description();} ?>" placeholder="description...">
+
                 </div>
             </div>
             <br>
@@ -100,7 +99,7 @@ if(array_key_exists('cancle', $_POST)){
                 reader.readAsDataURL(fajl);
                 reader.onload = function (e){
                     var img = document.getElementById("img");
-                    img.src = e.target.result;    
+                    img.style.backgroundImage = "url("+e.target.result+")";    
                 };
 
                 reader.error = function (){
