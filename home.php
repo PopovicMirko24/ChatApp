@@ -5,6 +5,7 @@ require_once 'classes/user-class.php';
 require_once 'classes/post-class.php';
 require_once 'classes/search-class.php';
 require_once 'classes/following-class.php';
+require_once 'nav.php'; 
 
 if (!$conn) {
     die("Neuspesna konekcija sa bazom");
@@ -39,7 +40,6 @@ if (array_key_exists('search-input', $_GET) && $_GET['search-input'] !== '') {
 </head>
 
 <body>
-    <?php require_once 'nav.php'; ?>
     <div class="following-s section">
         <div class="following">
             <h3>following</h3>

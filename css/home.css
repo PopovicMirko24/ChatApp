@@ -10,6 +10,7 @@
 
 .section{
     display: inline-block;
+    z-index: 0;
 }
 
 .posts{
