@@ -227,8 +227,8 @@ class User
                     echo "<td>" . $users[$i]['last_name'] . "</td>";
                     echo "<td>" . $users[$i]['email'] . "</td>";
                     echo "<td>" . $users[$i]['description'] . "</td>";
-                    echo "<td> <a href=\"user.php?username=" . $users[$i]['username'] . "\"> view </td>";
-                    echo "<td> <a onClick=\" javascript:return confirm('Are you sure you want to delete this?');\" href=\"delete-user.php?user_id=" . $users[$i]['user_id'] . "\" > delete </td>";
+                    echo "<td> <a class=\"view\" href=\"user.php?username=" . $users[$i]['username'] . "\"> view </td>";
+                    echo "<td> <a class=\"delete\" onClick=\"deleteUser(".$users[$i]['user_id'].")\" > delete </td>";
                     echo "</tr>";
                 }
             }

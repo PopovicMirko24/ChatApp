@@ -20,5 +20,4 @@ $run = $conn->prepare($sql_follower);
 $run->execute();
 $run = $conn->prepare($sql_following);
 $run->execute();
-header('location: admin-deashboard.php');
 ?>

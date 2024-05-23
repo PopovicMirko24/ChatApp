@@ -80,3 +80,19 @@ tr:nth-child(even) {
         font-size: 10px;
     }
 }
+
+.delete{
+    cursor: pointer;
+}
+
+.delete:hover{
+    color: red;
+}
+
+.view:hover{
+    color: lime;
+}
+
+td a{
+    text-decoration: none;
+}
