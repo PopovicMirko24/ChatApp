@@ -5,9 +5,7 @@ require_once 'classes/user-class.php';
 require_once 'classes/post-class.php';
 require_once 'classes/search-class.php';
 
-if (!$conn) {
-    die("Neuspesna konekcija sa bazom");
-}
+if (!$conn) die("Neuspesna konekcija sa bazom");
 
 if (!isset($_SESSION['user_id'])) {
     header('location: login.php');
@@ -26,7 +24,7 @@ $description = null;
 if (array_key_exists('cancle', $_POST)) {
     header('location: profile.php');
 } else if ($_SERVER["REQUEST_METHOD"] == "POST" && array_key_exists('save', $_POST)) {
-    if ($_POST['description'] != null || $_POST['description'] != "") {
+    if ($_POST['description'] != null) {
         $description = $_POST['description'];
     }
     $name = $_POST['name'];
@@ -98,13 +96,13 @@ if (array_key_exists('cancle', $_POST)) {
     </div>
     <script>
         function ucitajFile() {
-            var file1 = document.getElementById("file");
-            if (file1.files.length != 0 && file1.files[0].type.match(/image.*/)) {
-                var fajl = file1.files[0];
-                var reader = new FileReader();
+            let file1 = document.getElementById("file");
+            if (file1.files.length !== 0 && file1.files[0].type.match(/image.*/)) {
+                let fajl = file1.files[0];
+                let reader = new FileReader();
                 reader.readAsDataURL(fajl);
                 reader.onload = function(e) {
-                    var img = document.getElementById("img");
+                    let img = document.getElementById("img");
                     img.style.backgroundImage = "url(" + e.target.result + ")";
                 };
 

@@ -2,6 +2,7 @@
 
 require_once 'scripts/php-scripts/connectionDB.php';
 require_once 'classes/user-class.php';
+require_once 'classes/search-class.php';
 
 if (!$conn) {
     die("Neuspesna konekcija sa bazom");
