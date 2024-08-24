@@ -1,128 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Space+Grotesk&display=swap');
-/*
-*{
-    font-family: "Comfortaa", sans-serif;
-}
-
-body{
-    background-color: rgb(11, 11, 11);
-}
-
-.container{
-    width: 40%;
-    background-color: #222222;
-    border-radius: 8px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    display: block;
-    margin: auto;
-
-    background-color: #222222;
-}
-
-.from-content{
-    padding: 10px 0;
-}
-
-
-h2{
-    font-weight: 300;
-    font-size: 30px;
-    letter-spacing: 2px;
-    color: white;
-}
-
-.form{
-    width: 100%;
-    text-align: center;
-}
-
-input{
-    margin-top: 30px;
-    text-align: center;
-    letter-spacing: 1.5px;
-}
-
-.text-input{
-    width: 250px;
-    height: 30px;
-    color: #700B97;
-    background-color: transparent;
-    font-size: 15px;
-
-    border-bottom: #700B97 solid 1.5px;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-}
-
-.text-input:focus{
-    border-bottom: #8E05C2 solid 2px;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    outline: none;
-    color: #8E05C2;
-}
-
-.button{
-    background-color: transparent;
-    color: #8E05C2;
-    border: 1px solid #8E05C2;
-    width: 100px;
-    height: 40px;
-    font-size: 15px;
-    transition: ease-in-out .3s;
-}
-
-.button:hover{
-    color: white;
-    border: 2px solid white;
-    letter-spacing: 3px;
-}
-
-p{
-    margin: 0px;
-    margin-top: 10px;
-}
-
-a{
-    color: white;
-    text-decoration: none;
-    font-size: 13px;
-}
-
-a:hover{
-    text-decoration: underline;
-    color: #8E05C2;
-}
-
-.error-message{
-    color: red;   
-}
-*/
-
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Space+Grotesk&display=swap');
 
 *{
     font-family: "Comfortaa", sans-serif;
 }
 
 body{
-    background-color: #f8f9fa; /* Very light gray */
+    background-color: rgb(7, 7, 7); /* Very light gray */
     overflow: hidden;
     padding-top: 100px;
 }
 
 .container{
     width: 40%;
-    background-color: white; /* White */
+    background-color: #171c24; /* White */
     border-radius: 8px;
     padding-top: 50px;
     padding-bottom: 50px;
     display: block;
     margin: auto;
-    box-shadow: 0 0 10px 0 rgb(175, 174, 174);
 }
 
 .form-content{
@@ -133,7 +28,7 @@ h2{
     font-weight: 300;
     font-size: 30px;
     letter-spacing: 2px;
-    color: #333; /* Dark gray */
+    color: white; /* Dark gray */
 }
 
 .form{
@@ -142,9 +37,13 @@ h2{
 }
 
 input{
-    margin-top: 30px;
+    margin-top: 10px;
     text-align: center;
     letter-spacing: 1.5px;
+    background-color: transparent;
+    border: 1px white solid;
+    padding: 5px;
+    border-radius: 10px;
 }
 
 
@@ -154,7 +53,7 @@ p{
 }
 
 a{
-    color: #333; /* Purple */
+    color: rgba(255, 255, 255, 0.54); /* Purple */
     text-decoration: none;
     font-size: 13px;
     transition: color 0.3s; /* Add transition effect */
@@ -167,4 +66,8 @@ a:hover{
 
 .error-message{
     color: red;   
+}
+
+.button{
+
 }

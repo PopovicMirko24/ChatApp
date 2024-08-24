@@ -59,12 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <h2>Login</h2>
                         <p class="error-message"><?php echo $error_text ?></p>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="username" id="username" placeholder="Username" required>
+                            <input type="text" name="username" id="username" placeholder="Username" required>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+                            <input  type="password" name="password" id="password" placeholder="Password" required>
                         </div>
-                        <button class="btn btn-primary btn-block" type="submit">Login</button>
+                        <button class="btn btn-success" type="submit">Login</button>
                         <p><a href="register.php">Register</a></p>
                     </div>
                 </form>

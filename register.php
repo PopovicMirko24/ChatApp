@@ -63,21 +63,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <h2>Register</h2>
                         <p class="error-message"><?php echo $error_text; ?></p>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="name" id="name" placeholder="Name" required>
+                            <input type="text" name="name" id="name" placeholder="Name" required>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Lastname" required>
+                            <input type="text" name="lastname" id="lastname" placeholder="Lastname" required>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="email" name="email" id="email" placeholder="Email" required>
+                            <input type="email" name="email" id="email" placeholder="Email" required>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="username" id="username" placeholder="Username" required>
+                            <input type="text" name="username" id="username" placeholder="Username" required>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+                            <input type="password" name="password" id="password" placeholder="Password" required>
                         </div>
-                        <button class="btn btn-primary btn-block" type="submit">Register</button>
+                        <button class="btn btn-success" type="submit">Register</button>
                         <p><a href="login.php">Login</a></p>
                     </div>
                 </form>
